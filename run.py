@@ -45,7 +45,7 @@ def calculate_t_significant():
     sum_cell_range = "F7"
     attendance.update(sum_cell_range,[[str(sum_t_significant)]])
 
-def calculate_PK_significant():
+def calculate_pk_significant():
     """
     Calculate column G in the "Portfolio3_distribution_keys" sheet "Attendance"
     """
@@ -75,6 +75,53 @@ def calculate_PK_significant():
     attendance.update(sum_cell_range,[[str(sum_pk_significant)]])    
 
 
+def calculate_structure_2():
+    """
+    Calculate and update table in the "Structure_2" worksheet
+    """
+    # Use the sheets "Attendance", "Structure_1" and "Structure_2"
+    attendance = SHEET.worksheet('Attendance')
+    structure_1 = SHEET.worksheet('Structure_1')
+    structure_2 = SHEET.worksheet('Structure_2')
+
+    # Get data from the "Attendance" worksheet
+    attendance_data = attendance.get_all_values()
+    attendance_headers = attendance_data[0] # First row of worksheet Attendance
+    
+    # Get data from the "Structure_1" worksheet
+    structure_1_data = structure_1.get_all_values()
+    structure_1_headers = structure_1_data[0] # First row of worksheet Structure_1
+    
+    # Initialize the updated data list for "Structure_2" with headers
+    updated_data = [structure_1_headers]
+
+    # Perform calculations and update the "Structure_2" worksheet
+    for idx, row in enumerate(attendance_data[1:], start=1):
+        
+        if row[0] == 'Total':
+            continue # Skip iteration for 'Total' row
+        company = row[0] # Get company names
+        updated_row = [company] # Each company name as a list
+        
+        for col_idx, header in enumerate(attendance_headers[1:], start=1):
+            
+            print(header)
+            if header.endswith('_T'):
+                t_percent = find_percentage(structure_1_data, company, header)
+                t_significant = round(convert_to_float(row[col_idx]) * t_percent)
+                updated_row.append(str(t_significant))
+            else:
+                pk_percent = find_percentage(structure_1_data, company, header)
+                pk_significant = round(convert_to_float(row[col_idx]) * pk_percent)
+                updated_row.append(str(pk_significant))
+
+        # Append the updated list 
+        updated_data.append(updated_row)
+    
+    # Update the "Structure_2" worksheet in the Google Sheet
+    structure_2.update(updated_data)
+
+
 def convert_to_int(value):
     """
     Return a default value, 0, for empty or non-integer values
@@ -93,13 +140,25 @@ def convert_to_float(value):
     except ValueError:
         return 0.0
 
+def find_percentage(data, company, header):
+    """
+    Find the percentage value in the "Structure_1" worksheet corresponding to the company and header
+    """
+    try:
+        col_idx = data[0].index(header)
+        row_idx = [row[0] for row in data].index(company)
+        return convert_to_float(data[row_idx][col_idx].strip('%')) / 100
+    except ValueError:
+        return 0.0
+
 
 def main():
     """
     Run all program functions
     """
-    calculate_t_significant()
-    calculate_PK_significant()
+    #calculate_t_significant()
+    #calculate_pk_significant()
+    calculate_structure_2()
 
 
 main()
