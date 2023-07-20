@@ -87,40 +87,62 @@ def calculate_structure_2():
     # Get data from the "Attendance" worksheet
     attendance_data = attendance.get_all_values()
     attendance_headers = attendance_data[0] # First row of worksheet Attendance
-    
+    attendance_t_significant = attendance_data[1][5] # content of cell F2 of worksheet Attendance
+    attendance_pk_significant = attendance_data[1][6] # content of cell G2 of worksheet Attendance
     # Get data from the "Structure_1" worksheet
     structure_1_data = structure_1.get_all_values()
     structure_1_headers = structure_1_data[0] # First row of worksheet Structure_1
-    
+    # print(structure_1_headers)
     # Initialize the updated data list for "Structure_2" with headers
     updated_data = [structure_1_headers]
 
     # Perform calculations and update the "Structure_2" worksheet
-    for idx, row in enumerate(attendance_data[1:], start=1):
-        
+    for idx, row in enumerate(structure_1_data[1:], start=1):
+        #print(idx)
         if row[0] == 'Total':
             continue # Skip iteration for 'Total' row
         company = row[0] # Get company names
+        #print(company)
         updated_row = [company] # Each company name as a list
-        
-        for col_idx, header in enumerate(attendance_headers[1:], start=1):
-            
-            print(header)
+        sum_t_significant = 0
+        sum_pk_significant = 0
+        for col_idx, header in enumerate(structure_1_headers[1:], start=1):
+            #print(col_idx, header)
             if header.endswith('_T'):
                 t_percent = find_percentage(structure_1_data, company, header)
-                t_significant = round(convert_to_float(row[col_idx]) * t_percent)
+                #print(t_percent)
+                t_significant = round(convert_to_int(attendance_data[idx][5]) * t_percent)
+                #print(convert_to_int(attendance_data[idx][5]))
+                sum_t_significant = sum_t_significant + t_significant
+                #print(t_significant)
                 updated_row.append(str(t_significant))
             else:
                 pk_percent = find_percentage(structure_1_data, company, header)
-                pk_significant = round(convert_to_float(row[col_idx]) * pk_percent)
+                pk_significant = round(convert_to_int(attendance_data[idx][6]) * pk_percent)
+                sum_pk_significant = sum_pk_significant + pk_significant
                 updated_row.append(str(pk_significant))
 
         # Append the updated list 
         updated_data.append(updated_row)
+
+
     
     # Update the "Structure_2" worksheet in the Google Sheet
     structure_2.update(updated_data)
+    result_travellers = verify_significant(sum_t_significant, convert_to_int(attendance_data[idx][5]))
+    result_passenger = verify_significant(sum_pk_significant, convert_to_int(attendance_data[idx][6]))
+    print(f"Data Travellers updated {result_travellers} in worksheet Structure_2")
+    print(f"Data Passenger-kilometers updated {result_passenger} in worksheet Structure_2")
 
+def verify_significant(data1, data2):
+    """
+    Print a warning to the console if sum_t_significant is != T_significant (in worksheet Attendance)
+    """
+    try:
+        data1 == data2
+        return "correctly"
+    except:
+        return "incorrectly"
 
 def convert_to_int(value):
     """
