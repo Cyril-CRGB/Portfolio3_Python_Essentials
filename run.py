@@ -151,6 +151,32 @@ def update_sum_column_structure_2():
     for column in range(1, 13): 
         structure_2.update(f"{chr(ord('A') + column)}7", [[str(column_sums[column])]])   
 
+def calculate_percent_structure_3():
+    """
+    Calculate percentage and update "Structure_3" worksheet
+    """
+    # Use the sheets "Structure_2" and "Structure_3"
+    structure_2 = SHEET.worksheet("Structure_2")
+    structure_3 = SHEET.worksheet("Structure_3")
+    # Get data from the "Structure_2" worksheet
+    structure_2_data = structure_2.get_all_values()
+
+    # Calculate percentage and update "Structure_3" worksheet
+    for row in range(1, 7):
+        for col in range(1, 13):
+            # Get the values from "Structure_2" and "Structure_3"
+            value_structure_2_numerator = convert_to_float(structure_2_data[row][col].replace(',', ''))
+            print(value_structure_2_numerator)
+            value_structure_2_denominator = convert_to_float(structure_2_data[6][col].replace(',', ''))
+            print(value_structure_2_denominator)
+            # Calculate percentage
+            percent = 100 * (value_structure_2_numerator / value_structure_2_denominator) if value_structure_2_denominator != 0 else 0
+            # Round to four decimals
+            percent_rounded = round(percent, 4)
+            print(percent_rounded)
+            # Update "Structure_3" with the calculated percentage
+            #cell_ref = structure_3.cell(row, col)
+            #structure_3.update(cell_ref, [[str(percent_rounded)]])
 
 
 def verify_significant(data1, data2):
@@ -200,7 +226,8 @@ def main():
     #calculate_t_significant()
     #calculate_pk_significant()
     #calculate_structure_2()
-    update_sum_column_structure_2()
+    #update_sum_column_structure_2()
+    calculate_percent_structure_3()
 
 
 main()
