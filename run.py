@@ -87,12 +87,11 @@ def calculate_structure_2():
     # Get data from the "Attendance" worksheet
     attendance_data = attendance.get_all_values()
     attendance_headers = attendance_data[0] # First row of worksheet Attendance
-    attendance_t_significant = attendance_data[1][5] # content of cell F2 of worksheet Attendance
-    attendance_pk_significant = attendance_data[1][6] # content of cell G2 of worksheet Attendance
+
     # Get data from the "Structure_1" worksheet
     structure_1_data = structure_1.get_all_values()
     structure_1_headers = structure_1_data[0] # First row of worksheet Structure_1
-    # print(structure_1_headers)
+    
     # Initialize the updated data list for "Structure_2" with headers
     updated_data = [structure_1_headers]
 
@@ -133,6 +132,26 @@ def calculate_structure_2():
     result_passenger = verify_significant(sum_pk_significant, convert_to_int(attendance_data[idx][6]))
     print(f"Data Travellers updated {result_travellers} in worksheet Structure_2")
     print(f"Data Passenger-kilometers updated {result_passenger} in worksheet Structure_2")
+
+
+def update_sum_column_structure_2():
+    """
+    Calculate sum of each column in "Structure_2" worksheet
+    """
+    # Use the sheets "Structure_2"
+    structure_2 = SHEET.worksheet('Structure_2')
+    # Get data from the "Structure_2" worksheet
+    structure_2_data = structure_2.get_all_values()
+    # Initialize an empty list to store the sums for each column
+    column_sums = [0] * len(structure_2_data[0]) 
+    for column in range(1, 13):
+        for row in range(1, 6):
+            column_sums[column] += convert_to_int(structure_2_data[row][column])
+    # Update row 7 with the column sums
+    for column in range(1, 13): 
+        structure_2.update(f"{chr(ord('A') + column)}7", [[str(column_sums[column])]])   
+
+
 
 def verify_significant(data1, data2):
     """
@@ -180,7 +199,8 @@ def main():
     """
     #calculate_t_significant()
     #calculate_pk_significant()
-    calculate_structure_2()
+    #calculate_structure_2()
+    update_sum_column_structure_2()
 
 
 main()

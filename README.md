@@ -3,3 +3,6 @@ buggs :
 - cant convert string to float with "float(string)", I need to replace "," by "."
 - cant convert null to integers or float, need to writh to try-except fonction to handle each of them
 - cant use function convert_to_float to convert percent
+
+nettoyage du code à faire :
+- supprimer # print()
