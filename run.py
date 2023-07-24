@@ -12,7 +12,11 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Portfolio3_distribution_keys')
-
+# Constant variables2
+CREDS2 = Credentials.from_service_account_file('creds2.json')
+SCOPED_CREDS2 = CREDS2.with_scopes(SCOPE)
+GSPREAD_CLIENT2 = gspread.authorize(SCOPED_CREDS2)
+SHEET2 = GSPREAD_CLIENT2.open('Portfolio3_distribution_keys_2')
 
 
 
@@ -157,7 +161,7 @@ def calculate_percent_structure_3():
     """
     # Use the sheets "Structure_2" and "Structure_3"
     structure_2 = SHEET.worksheet("Structure_2")
-    structure_3 = SHEET.worksheet("Structure_3")
+    structure_3 = SHEET2.worksheet("Structure_3")
     # Get data from the "Structure_2" worksheet
     structure_2_data = structure_2.get_all_values()
 
@@ -166,17 +170,18 @@ def calculate_percent_structure_3():
         for col in range(1, 13):
             # Get the values from "Structure_2" and "Structure_3"
             value_structure_2_numerator = convert_to_float(structure_2_data[row][col].replace(',', ''))
-            print(value_structure_2_numerator)
+            #print(value_structure_2_numerator)
             value_structure_2_denominator = convert_to_float(structure_2_data[6][col].replace(',', ''))
-            print(value_structure_2_denominator)
+            #print(value_structure_2_denominator)
             # Calculate percentage
             percent = 100 * (value_structure_2_numerator / value_structure_2_denominator) if value_structure_2_denominator != 0 else 0
             # Round to four decimals
             percent_rounded = round(percent, 4)
-            print(percent_rounded)
+            #print(percent_rounded)
             # Update "Structure_3" with the calculated percentage
-            #cell_ref = structure_3.cell(row, col)
-            #structure_3.update(cell_ref, [[str(percent_rounded)]])
+            cell_ref = chr(ord('B') + col-1) + str(row+1)
+            #print(cell_ref)
+            structure_3.update(cell_ref, [[str(percent_rounded)]])
 
 
 def verify_significant(data1, data2):
