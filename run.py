@@ -184,6 +184,49 @@ def calculate_percent_structure_3():
             structure_3.update(cell_ref, [[str(percent_rounded)]])
 
 
+def calculate_average_km():
+    """
+    Calculate average kilometers and update "average_km" worksheet
+    """
+    # Use the sheets "Structure_2" and "Average_km"
+    structure_2 = SHEET.worksheet("Structure_2")
+    average_km = SHEET2.worksheet("Average_km")
+    # Get data from the "Structure_2" worksheet
+    structure_2_data = structure_2.get_all_values()
+    # Calculate average kilometers and update "Average_km" worksheet
+    for row in range(1,6):
+        # Get the values from "Structure_2"
+        adults_pk = convert_to_float(structure_2_data[row][2].replace(',', ''))
+        adults_t = convert_to_float(structure_2_data[row][1].replace(',', ''))
+        children_pk = convert_to_float(structure_2_data[row][4].replace(',', ''))
+        children_t = convert_to_float(structure_2_data[row][3].replace(',', ''))
+        subscription_adults_pk = convert_to_float(structure_2_data[row][6].replace(',', ''))
+        subscription_adults_t = convert_to_float(structure_2_data[row][5].replace(',', ''))
+        subscription_children_pk = convert_to_float(structure_2_data[row][8].replace(',', ''))
+        subscription_children_t = convert_to_float(structure_2_data[row][7].replace(',', ''))
+        tickets_other_pk = convert_to_float(structure_2_data[row][10].replace(',', ''))
+        tickets_other_t = convert_to_float(structure_2_data[row][9].replace(',', ''))
+        subscription_other_pk = convert_to_float(structure_2_data[row][12].replace(',', ''))
+        subscription_other_t = convert_to_float(structure_2_data[row][11].replace(',', ''))
+        # Calculate average kilometers row by row and column by column
+        average_ticket_adults_km = adults_pk / adults_t if adults_t != 0 else 0
+        average_ticket_children_km = children_pk / children_t if children_t != 0 else 0
+        average_subscription_adults_km = subscription_adults_pk / subscription_adults_t if subscription_adults_t != 0 else 0
+        average_subscription_children_km = subscription_children_pk / subscription_children_t if subscription_children_t != 0 else 0
+        average_tickets_other_km = tickets_other_pk / tickets_other_t if tickets_other_t != 0 else 0
+        average_subscription_other_km = subscription_other_pk / subscription_other_t if subscription_other_t != 0 else 0
+        # Update "Average_km" with the calculated average kilometers
+        average_km.update_cell((row + 1), 2, round(average_ticket_adults_km, 4))
+        average_km.update_cell((row + 1), 3, round(average_ticket_children_km, 4))
+        average_km.update_cell((row + 1), 4, round(average_subscription_adults_km, 4))
+        average_km.update_cell((row + 1), 5, round(average_subscription_children_km, 4))
+        average_km.update_cell((row + 1), 6, round(average_tickets_other_km, 4))
+        average_km.update_cell((row + 1), 7, round(average_subscription_other_km, 4))
+
+
+
+
+
 def verify_significant(data1, data2):
     """
     Print a warning to the console if sum_t_significant is != T_significant (in worksheet Attendance)
@@ -232,7 +275,8 @@ def main():
     #calculate_pk_significant()
     #calculate_structure_2()
     #update_sum_column_structure_2()
-    calculate_percent_structure_3()
+    #calculate_percent_structure_3()
+    calculate_average_km()
 
 
 main()
