@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import numpy as np
+import pandas as pd
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -223,7 +225,46 @@ def calculate_average_km():
         average_km.update_cell((row + 1), 6, round(average_tickets_other_km, 4))
         average_km.update_cell((row + 1), 7, round(average_subscription_other_km, 4))
 
-
+def calculate_regression():
+    """
+    Calculate regression and update "Regression" worksheet
+    """
+    # Use the sheets "Average_km" and "Regression" and "Fare_Grid"
+    average_km = SHEET2.worksheet("Average_km")
+    regression = SHEET2.worksheet("Regression")
+    fare_grid = SHEET2.worksheet("Fare_Grid")
+    # Get data from the "Average_km" worksheet
+    average_km_data = average_km.get_all_values()
+    headers = average_km_data[0]
+    # Create a DataFrame from the data
+    df = pd.DataFrame(average_km_data[1:], columns=headers)
+    # Perform regression for each column
+    for col in range(1,5):
+        # Check the header to determine the corresponding column in the worksheet Fare_Grid
+        header = headers[col]
+        if "Ticket_Adults" in header or "Ticket_Other" in header:
+            grid_col = 1
+        elif "Ticket_Children" in header:
+            grid_col = 2
+        elif "Subscriptions_Adults" in header or "Subcriptions_Other" in header:
+            grid_col = 3
+        elif "Subcriptions_Children" in header:
+            grid_col = 4
+        else:
+            continue # Skip if the header doesn't match any category
+        # Convert data to float and round up
+        x = df["Companies"].astype(float)
+        y = df[header].astype(float)
+        # Get the data from the "Fare_Grid" worksheet
+        grid_data = fare_grid.get_all_values()
+        # Get the x and y values from the "Fare_Grid"
+        x_grid = [float(row[0].replace(',', '.')) for row in grid_data[1:]]
+        y_grid = [float(row[grid_col].replace(',', '.')) for row in grid_data[1:]]
+        # Calculate regression coefficients
+        a, b = np.polyfit(x, y, 1)
+        # Update "Regression" with the calculated coefficients
+        regression.update_cell(col+1, 1, round(b, 4))
+        regression.update_cell(col+1, 2, round(a, 4))
 
 
 
@@ -276,7 +317,8 @@ def main():
     #calculate_structure_2()
     #update_sum_column_structure_2()
     #calculate_percent_structure_3()
-    calculate_average_km()
+    #calculate_average_km()
+    calculate_regression()
 
 
 main()

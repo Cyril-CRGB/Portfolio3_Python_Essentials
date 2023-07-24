@@ -7,3 +7,7 @@ buggs :
 
 nettoyage du code à faire :
 - supprimer # print()
+
+import de librairies spéciales : 
+numpy (fonction "Calculate_regression")
+pandas (fonction "Calculate_regression")
