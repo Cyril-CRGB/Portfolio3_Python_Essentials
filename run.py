@@ -239,8 +239,9 @@ def calculate_regression():
     # Create a DataFrame from the data
     df = pd.DataFrame(average_km_data[1:], columns=headers)
     # Perform regression for each column
-    for col in range(1,5):
+    for col in range(1, 5):
         # Check the header to determine the corresponding column in the worksheet Fare_Grid
+        print(col)
         header = headers[col]
         if "Ticket_Adults" in header or "Ticket_Other" in header:
             grid_col = 1
@@ -263,8 +264,8 @@ def calculate_regression():
         # Calculate regression coefficients
         a, b = np.polyfit(x, y, 1)
         # Update "Regression" with the calculated coefficients
-        regression.update_cell(col+1, 1, round(b, 4))
-        regression.update_cell(col+1, 2, round(a, 4))
+        #regression.update_cell(col+1, 1, round(b, 4))
+        #regression.update_cell(col+1, 2, round(a, 4))
 
 
 
