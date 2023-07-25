@@ -236,36 +236,52 @@ def calculate_regression():
     # Get data from the "Average_km" worksheet
     average_km_data = average_km.get_all_values()
     headers = average_km_data[0]
+    #print(headers)
     # Create a DataFrame from the data
     df = pd.DataFrame(average_km_data[1:], columns=headers)
+    print(df)
     # Perform regression for each column
-    for col in range(1, 5):
+    for col in range(1, 7):
         # Check the header to determine the corresponding column in the worksheet Fare_Grid
-        print(col)
+        #print(col)
         header = headers[col]
-        if "Ticket_Adults" in header or "Ticket_Other" in header:
+        #print(header)
+        if "Tickets_Adults" in header or "Tickets_Other" in header:
             grid_col = 1
-        elif "Ticket_Children" in header:
+            print("grid_col_1")
+        elif "Tickets_Children" in header:
             grid_col = 2
-        elif "Subscriptions_Adults" in header or "Subcriptions_Other" in header:
+            print("grid_col_2")
+        elif "Subscriptions_Adults" in header or "Subscriptions_Other" in header:
             grid_col = 3
-        elif "Subcriptions_Children" in header:
+            print("grid_col_3")
+        elif "Subscriptions_Children" in header:
             grid_col = 4
+            print("grid_col_4")
         else:
             continue # Skip if the header doesn't match any category
         # Convert data to float and round up
-        x = df["Companies"].astype(float)
-        y = df[header].astype(float)
+        x = df[header].str.replace(',', '.').astype(float)
+        print(x)
         # Get the data from the "Fare_Grid" worksheet
         grid_data = fare_grid.get_all_values()
         # Get the x and y values from the "Fare_Grid"
         x_grid = [float(row[0].replace(',', '.')) for row in grid_data[1:]]
+        print(x_grid)
         y_grid = [float(row[grid_col].replace(',', '.')) for row in grid_data[1:]]
+        print(y_grid)
+        # Find the nearest value in x_grid for each x value in df
+        indices = np.searchsorted(x_grid, x, side='left')
+        # Get the corresponding y_grid value for each x value
+        y_approx = np.array(y_grid)[indices]
+        print(y_approx)
         # Calculate regression coefficients
-        a, b = np.polyfit(x, y, 1)
+        a, b = np.polyfit(x, y_approx, 1)
+        print(a)
+        print(b)
         # Update "Regression" with the calculated coefficients
-        #regression.update_cell(col+1, 1, round(b, 4))
-        #regression.update_cell(col+1, 2, round(a, 4))
+        regression.update_cell(col+2, 2, round(b, 4))
+        regression.update_cell(col+2, 3, round(a, 4))
 
 
 
