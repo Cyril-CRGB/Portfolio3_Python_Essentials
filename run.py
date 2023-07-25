@@ -362,6 +362,42 @@ def calculate_sharePassengerkilometers():
         # Update regression worksheet with totalprices
         regression.update_cell((i + 1), 7, round(sharepassengerkilometers, 2))
 
+def calculate_keys():
+    """
+    Calculate keys for each company and update "Keys" worksheet
+    """
+    # Use the sheets "Structure_3, "Turnover" and "Regression"
+    structure_3 = SHEET2.worksheet("Structure_3")
+    turnover = SHEET2.worksheet("Turnover")
+    regression = SHEET2.worksheet("Regression")
+    # Get data from the worksheets
+    structure_3_data = structure_3.get_all_values()
+    turnover_data = turnover.get_all_values()
+    regression_data = regression.get_all_values()
+    # find data and operate with them
+    listnew = []
+    listnew2 = []
+    listnew3 = []
+    for l in range(2, 8):
+        ufokey_sharetravellers = convert_to_float(regression_data[l][5].replace(',', '.'))
+        listnew.append(ufokey_sharetravellers)
+    
+    for i in range(1, 13):
+        if i % 2 !=0:
+            ufokey_structure_3 = convert_to_float(structure_3_data[1][i].replace(',', '.'))
+            listnew2.append(ufokey_structure_3)
+        else:
+            continue
+    for x, y in zip(listnew, listnew2):
+        multipl = x * y
+        listnew3.append(multipl)
+    print(listnew3)
+        #print(ufokey_structure_3)
+        #print(ufokey_turnover)
+        #print(ufokey_regression)
+        # Update regression worksheet with totalprices
+        #regression.update_cell((i + 1), 7, round(sharepassengerkilometers, 2))
+
 def verify_significant(data1, data2):
     """
     Print a warning to the console if sum_t_significant is != T_significant (in worksheet Attendance)
@@ -416,6 +452,7 @@ def main():
     #calculate_total_average_pk()
     #calculate_totalprice()
     #calculate_sharetravellers()
-    calculate_sharePassengerkilometers()
+    #calculate_sharePassengerkilometers()
+    calculate_keys()
 
 main()
