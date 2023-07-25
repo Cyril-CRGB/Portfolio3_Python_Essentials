@@ -283,7 +283,84 @@ def calculate_regression():
         regression.update_cell(col+2, 2, round(b, 4))
         regression.update_cell(col+2, 3, round(a, 4))
 
+def calculate_total_average_pk():
+    """
+    Calculate total average pk and update "Regression" worksheet
+    """
+    # Use the sheets "Structure_2" and "Regression"
+    structure_2 = SHEET.worksheet("Structure_2")
+    regression = SHEET2.worksheet("Regression")
+    # Get data from the "Structure_2" worksheet
+    structure_2_data = structure_2.get_all_values()
+    # Get the values from "Structure_2"
+    total_adults_pk = convert_to_float(structure_2_data[6][2].replace(',', ''))
+    total_adults_t = convert_to_float(structure_2_data[6][1].replace(',', ''))
+    total_children_pk = convert_to_float(structure_2_data[6][4].replace(',', ''))
+    total_children_t = convert_to_float(structure_2_data[6][3].replace(',', ''))
+    total_subscription_adults_pk = convert_to_float(structure_2_data[6][6].replace(',', ''))
+    total_subscription_adults_t = convert_to_float(structure_2_data[6][5].replace(',', ''))
+    total_subscription_children_pk = convert_to_float(structure_2_data[6][8].replace(',', ''))
+    total_subscription_children_t = convert_to_float(structure_2_data[6][7].replace(',', ''))
+    total_tickets_other_pk = convert_to_float(structure_2_data[6][10].replace(',', ''))
+    total_tickets_other_t = convert_to_float(structure_2_data[6][9].replace(',', ''))
+    total_subscription_other_pk = convert_to_float(structure_2_data[6][12].replace(',', ''))
+    total_subscription_other_t = convert_to_float(structure_2_data[6][11].replace(',', ''))
+    # Calculate total average kilometers row by row and column by column
+    total_average_ticket_adults_km = total_adults_pk / total_adults_t if total_adults_t != 0 else 0
+    total_average_ticket_children_km = total_children_pk / total_children_t if total_children_t != 0 else 0
+    total_average_subscription_adults_km = total_subscription_adults_pk / total_subscription_adults_t if total_subscription_adults_t != 0 else 0
+    total_average_subscription_children_km = total_subscription_children_pk / total_subscription_children_t if total_subscription_children_t != 0 else 0
+    total_average_tickets_other_km = total_tickets_other_pk / total_tickets_other_t if total_tickets_other_t != 0 else 0
+    total_average_subscription_other_km = total_subscription_other_pk / total_subscription_other_t if total_subscription_other_t != 0 else 0
+    # Update "Average_km" with the calculated average kilometers
+    regression.update_cell((3), 4, round(total_average_ticket_adults_km, 4))
+    regression.update_cell((4), 4, round(total_average_ticket_children_km, 4))
+    regression.update_cell((5), 4, round(total_average_subscription_adults_km, 4))
+    regression.update_cell((6), 4, round(total_average_subscription_children_km, 4))
+    regression.update_cell((7), 4, round(total_average_tickets_other_km, 4))
+    regression.update_cell((8), 4, round(total_average_subscription_other_km, 4))
 
+def calculate_totalprice():
+    """
+    Calculate total price and update "Regression" worksheet
+    """
+    # Use the sheets "Regression"
+    regression = SHEET2.worksheet("Regression")
+    # Get data from the "Structure_2" worksheet
+    regression_data = regression.get_all_values()
+    # find data and operate with them
+    for i in range(2, 8):
+        totalprices = convert_to_float(regression_data[i][1].replace(',', '.')) + (convert_to_float(regression_data[i][2].replace(',', '.')) * convert_to_float(regression_data[i][3].replace(',', '.')))
+        # Update regression worksheet with totalprices
+        regression.update_cell((i + 1), 5, round(totalprices, 4))
+
+def calculate_sharetravellers():
+    """
+    Calculate share travellers and update "Regression" worksheet
+    """
+    # Use the sheets "Regression"
+    regression = SHEET2.worksheet("Regression")
+    # Get data from the "Structure_2" worksheet
+    regression_data = regression.get_all_values()
+    # find data and operate with them
+    for i in range(2, 8):
+        sharetravellers = convert_to_float(regression_data[i][1].replace(',', '.')) / convert_to_float(regression_data[i][4].replace(',', '.'))
+        # Update regression worksheet with totalprices
+        regression.update_cell((i + 1), 6, round(sharetravellers, 2))
+
+def calculate_sharePassengerkilometers():
+    """
+    Calculate Share Passenger Kilometers and update "Regression" worksheet
+    """
+    # Use the sheets "Regression"
+    regression = SHEET2.worksheet("Regression")
+    # Get data from the "Structure_2" worksheet
+    regression_data = regression.get_all_values()
+    # find data and operate with them
+    for i in range(2, 8):
+        sharepassengerkilometers = convert_to_float(regression_data[i][2].replace(',', '.')) * convert_to_float(regression_data[i][3].replace(',', '.')) / convert_to_float(regression_data[i][4].replace(',', '.'))
+        # Update regression worksheet with totalprices
+        regression.update_cell((i + 1), 7, round(sharepassengerkilometers, 2))
 
 def verify_significant(data1, data2):
     """
@@ -335,7 +412,10 @@ def main():
     #update_sum_column_structure_2()
     #calculate_percent_structure_3()
     #calculate_average_km()
-    calculate_regression()
-
+    #calculate_regression()
+    #calculate_total_average_pk()
+    #calculate_totalprice()
+    #calculate_sharetravellers()
+    calculate_sharePassengerkilometers()
 
 main()
