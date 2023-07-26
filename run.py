@@ -15,10 +15,10 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Portfolio3_distribution_keys')
 # Constant variables2
-CREDS2 = Credentials.from_service_account_file('creds2.json')
-SCOPED_CREDS2 = CREDS2.with_scopes(SCOPE)
-GSPREAD_CLIENT2 = gspread.authorize(SCOPED_CREDS2)
-SHEET2 = GSPREAD_CLIENT2.open('Portfolio3_distribution_keys_2')
+#CREDS2 = Credentials.from_service_account_file('creds2.json')
+#SCOPED_CREDS2 = CREDS2.with_scopes(SCOPE)
+#GSPREAD_CLIENT2 = gspread.authorize(SCOPED_CREDS2)
+SHEET2 = GSPREAD_CLIENT.open('Portfolio3_distribution_keys_2')
 
 
 # Main functions
@@ -462,17 +462,17 @@ def main():
     """
     Run all program functions
     """
-    #calculate_t_significant()
-    #calculate_pk_significant()
-    #calculate_structure_2()
-    #update_sum_column_structure_2()
-    #calculate_percent_structure_3()
-    #calculate_average_km()
-    #calculate_regression()
-    #calculate_total_average_pk()
-    #calculate_totalprice()
-    #calculate_sharetravellers()
-    #calculate_sharePassengerkilometers()
+    calculate_t_significant()
+    calculate_pk_significant()
+    calculate_structure_2()
+    update_sum_column_structure_2()
+    calculate_percent_structure_3()
+    calculate_average_km()
+    calculate_regression()
+    calculate_total_average_pk()
+    calculate_totalprice()
+    calculate_sharetravellers()
+    calculate_sharePassengerkilometers()
     calculate_keys()
 
 main()
