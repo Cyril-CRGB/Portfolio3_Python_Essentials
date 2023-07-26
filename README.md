@@ -102,6 +102,6 @@ I had to use private navigator, it seems like some of the code is not compatible
 
 ## Find this web site:
 
-[My Second Project live](https://cyril-crgb.github.io/Portfolio2_JavaScript_Essentials/)
+[My Second Project live](https://portfolio3-python-essentials-d35a77840b91.herokuapp.com/)
 
 [My page on GitHub](https://github.com/Cyril-CRGB/Portfolio2_JavaScript_Essentials.git)
