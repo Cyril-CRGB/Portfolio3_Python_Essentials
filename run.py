@@ -366,37 +366,103 @@ def calculate_keys():
     """
     Calculate keys for each company and update "Keys" worksheet
     """
-    # Use the sheets "Structure_3, "Turnover" and "Regression"
+    # Use the sheets "Structure_3, "Turnover", "Regression" and "Keys"
     structure_3 = SHEET2.worksheet("Structure_3")
     turnover = SHEET2.worksheet("Turnover")
     regression = SHEET2.worksheet("Regression")
+    keysworksheet = SHEET2.worksheet("Keys")
     # Get data from the worksheets
     structure_3_data = structure_3.get_all_values()
     turnover_data = turnover.get_all_values()
     regression_data = regression.get_all_values()
     # find data and operate with them
-    listnew = []
-    listnew2 = []
-    listnew3 = []
+    listshareturnover = []
+    listkeytravellers = []
+    listkeypassengers = []
+    for k in range(1, 7):
+        shareturnover = convert_to_float(turnover_data[k][2].replace(',', '.'))
+        listshareturnover.append(shareturnover)
+
     for l in range(2, 8):
-        ufokey_sharetravellers = convert_to_float(regression_data[l][5].replace(',', '.'))
-        listnew.append(ufokey_sharetravellers)
-    
+        key_sharetravellers = convert_to_float(regression_data[l][5].replace(',', '.'))
+        listkeytravellers.append(key_sharetravellers)
+        key_sharepassengers = convert_to_float(regression_data[l][6].replace(',', '.'))
+        listkeypassengers.append(key_sharepassengers)
+
+
+    listnew3 = []
+    listnew4 = []
+    listnew5 = []
+    listkeys = []
+    # Loop through all rows of "Structure_3" only companies
+    for m in range(1, 6):
+        # Capture the returned values from operate_data_key() function
+        listkeystructure3t, listkeystructure3pk = operate_data_key(m)
+        for x, y in zip(listkeytravellers, listkeystructure3t):
+            multipl1 = x * y
+            listnew3.append(multipl1)
+
+        for w, z in zip(listkeypassengers, listkeystructure3pk):
+            multipl2 = w * z
+            listnew4.append(multipl2)
+
+        for a, b in zip(listnew3, listnew4):
+            additi = a + b
+            listnew5.append(additi)
+
+        for itemlist5, itemlistshare in zip(listnew5, listshareturnover):
+            key = itemlist5 * itemlistshare 
+            listkeys.append(key)
+        
+        finalcompanykey = round(sum(listkeys), 4)
+        companyname = structure_3_data[m][0]
+
+        #print(f'listkeytravellers for {companyname} is : {listkeytravellers})')
+        #print('...next...')
+        #print(f'listkeystructure3t for {companyname} is : {listkeystructure3t})')
+        #print('...next...')
+        #print(f'multipl1 x * y for {companyname} is : {listnew3})')
+        #print('...next...')
+        #print(listkeypassengers)
+        #print('...next...')
+        #print(listkeystructure3pk)
+        #print('...next...')
+        #print(listnew4)
+        #print('...next...')
+        #print(listnew5)
+        #print('...next...')
+        #print(listshareturnover)
+        #print('...next...')
+        #print(listkeys)
+        print(f'...final {companyname} key is : {finalcompanykey}')
+        
+        # Update keys worksheet with finalcompanykey
+        keysworksheet.update_cell((m + 1), 2, finalcompanykey)
+        # Reset all lists of this function to empty
+        listnew3 = []
+        listnew4 = []
+        listnew5 = []
+        listkeys = []
+
+def operate_data_key(row):
+    # Use the sheets "Structure_3, "Turnover", "Regression" and "Keys"
+    structure_3 = SHEET2.worksheet("Structure_3")
+    # Get data from the worksheets
+    structure_3_data = structure_3.get_all_values()
+    listkeystructure3t = []
+    listkeystructure3pk = []
     for i in range(1, 13):
         if i % 2 !=0:
-            ufokey_structure_3 = convert_to_float(structure_3_data[1][i].replace(',', '.'))
-            listnew2.append(ufokey_structure_3)
+            key_structure_3_t = convert_to_float(structure_3_data[row][i].replace(',', '.'))
+            listkeystructure3t.append(key_structure_3_t)
         else:
-            continue
-    for x, y in zip(listnew, listnew2):
-        multipl = x * y
-        listnew3.append(multipl)
-    print(listnew3)
-        #print(ufokey_structure_3)
-        #print(ufokey_turnover)
-        #print(ufokey_regression)
-        # Update regression worksheet with totalprices
-        #regression.update_cell((i + 1), 7, round(sharepassengerkilometers, 2))
+            key_structure_3_pk = convert_to_float(structure_3_data[row][i].replace(',', '.'))
+            listkeystructure3pk.append(key_structure_3_pk)
+    return listkeystructure3t, listkeystructure3pk
+
+
+
+
 
 def verify_significant(data1, data2):
     """
