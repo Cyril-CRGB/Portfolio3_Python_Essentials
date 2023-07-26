@@ -23,7 +23,7 @@ SHEET2 = GSPREAD_CLIENT.open('Portfolio3_distribution_keys_2')
 
 print()
 
-# Main functions
+# Major functions
 def calculate_t_significant():
     """
     Calculate column F in the "Portfolio3_distribution_keys" sheet "Attendance"
