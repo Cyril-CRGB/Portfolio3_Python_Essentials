@@ -21,7 +21,7 @@ GSPREAD_CLIENT2 = gspread.authorize(SCOPED_CREDS2)
 SHEET2 = GSPREAD_CLIENT2.open('Portfolio3_distribution_keys_2')
 
 
-
+# Main functions
 def calculate_t_significant():
     """
     Calculate column F in the "Portfolio3_distribution_keys" sheet "Attendance"
@@ -80,7 +80,6 @@ def calculate_pk_significant():
     sum_cell_range = "G7"
     attendance.update(sum_cell_range,[[str(sum_pk_significant)]])    
 
-
 def calculate_structure_2():
     """
     Calculate and update table in the "Structure_2" worksheet
@@ -89,56 +88,41 @@ def calculate_structure_2():
     attendance = SHEET.worksheet('Attendance')
     structure_1 = SHEET.worksheet('Structure_1')
     structure_2 = SHEET.worksheet('Structure_2')
-
     # Get data from the "Attendance" worksheet
     attendance_data = attendance.get_all_values()
     attendance_headers = attendance_data[0] # First row of worksheet Attendance
-
     # Get data from the "Structure_1" worksheet
     structure_1_data = structure_1.get_all_values()
     structure_1_headers = structure_1_data[0] # First row of worksheet Structure_1
-    
     # Initialize the updated data list for "Structure_2" with headers
     updated_data = [structure_1_headers]
-
     # Perform calculations and update the "Structure_2" worksheet
     for idx, row in enumerate(structure_1_data[1:], start=1):
-        #print(idx)
         if row[0] == 'Total':
             continue # Skip iteration for 'Total' row
         company = row[0] # Get company names
-        #print(company)
         updated_row = [company] # Each company name as a list
         sum_t_significant = 0
         sum_pk_significant = 0
         for col_idx, header in enumerate(structure_1_headers[1:], start=1):
-            #print(col_idx, header)
             if header.endswith('_T'):
                 t_percent = find_percentage(structure_1_data, company, header)
-                #print(t_percent)
                 t_significant = round(convert_to_int(attendance_data[idx][5]) * t_percent)
-                #print(convert_to_int(attendance_data[idx][5]))
                 sum_t_significant = sum_t_significant + t_significant
-                #print(t_significant)
                 updated_row.append(str(t_significant))
             else:
                 pk_percent = find_percentage(structure_1_data, company, header)
                 pk_significant = round(convert_to_int(attendance_data[idx][6]) * pk_percent)
                 sum_pk_significant = sum_pk_significant + pk_significant
                 updated_row.append(str(pk_significant))
-
         # Append the updated list 
         updated_data.append(updated_row)
-
-
-    
     # Update the "Structure_2" worksheet in the Google Sheet
     structure_2.update(updated_data)
     result_travellers = verify_significant(sum_t_significant, convert_to_int(attendance_data[idx][5]))
     result_passenger = verify_significant(sum_pk_significant, convert_to_int(attendance_data[idx][6]))
     print(f"Data Travellers updated {result_travellers} in worksheet Structure_2")
     print(f"Data Passenger-kilometers updated {result_passenger} in worksheet Structure_2")
-
 
 def update_sum_column_structure_2():
     """
@@ -166,25 +150,19 @@ def calculate_percent_structure_3():
     structure_3 = SHEET2.worksheet("Structure_3")
     # Get data from the "Structure_2" worksheet
     structure_2_data = structure_2.get_all_values()
-
     # Calculate percentage and update "Structure_3" worksheet
     for row in range(1, 7):
         for col in range(1, 13):
             # Get the values from "Structure_2" and "Structure_3"
             value_structure_2_numerator = convert_to_float(structure_2_data[row][col].replace(',', ''))
-            #print(value_structure_2_numerator)
             value_structure_2_denominator = convert_to_float(structure_2_data[6][col].replace(',', ''))
-            #print(value_structure_2_denominator)
             # Calculate percentage
             percent = 100 * (value_structure_2_numerator / value_structure_2_denominator) if value_structure_2_denominator != 0 else 0
             # Round to four decimals
             percent_rounded = round(percent, 4)
-            #print(percent_rounded)
             # Update "Structure_3" with the calculated percentage
             cell_ref = chr(ord('B') + col-1) + str(row+1)
-            #print(cell_ref)
             structure_3.update(cell_ref, [[str(percent_rounded)]])
-
 
 def calculate_average_km():
     """
@@ -236,16 +214,13 @@ def calculate_regression():
     # Get data from the "Average_km" worksheet
     average_km_data = average_km.get_all_values()
     headers = average_km_data[0]
-    #print(headers)
     # Create a DataFrame from the data
     df = pd.DataFrame(average_km_data[1:], columns=headers)
     print(df)
     # Perform regression for each column
     for col in range(1, 7):
         # Check the header to determine the corresponding column in the worksheet Fare_Grid
-        #print(col)
         header = headers[col]
-        #print(header)
         if "Tickets_Adults" in header or "Tickets_Other" in header:
             grid_col = 1
             print("grid_col_1")
@@ -262,23 +237,17 @@ def calculate_regression():
             continue # Skip if the header doesn't match any category
         # Convert data to float and round up
         x = df[header].str.replace(',', '.').astype(float)
-        print(x)
         # Get the data from the "Fare_Grid" worksheet
         grid_data = fare_grid.get_all_values()
         # Get the x and y values from the "Fare_Grid"
         x_grid = [float(row[0].replace(',', '.')) for row in grid_data[1:]]
-        print(x_grid)
         y_grid = [float(row[grid_col].replace(',', '.')) for row in grid_data[1:]]
-        print(y_grid)
         # Find the nearest value in x_grid for each x value in df
         indices = np.searchsorted(x_grid, x, side='left')
         # Get the corresponding y_grid value for each x value
         y_approx = np.array(y_grid)[indices]
-        print(y_approx)
         # Calculate regression coefficients
         a, b = np.polyfit(x, y_approx, 1)
-        print(a)
-        print(b)
         # Update "Regression" with the calculated coefficients
         regression.update_cell(col+2, 2, round(b, 4))
         regression.update_cell(col+2, 3, round(a, 4))
@@ -375,67 +344,50 @@ def calculate_keys():
     structure_3_data = structure_3.get_all_values()
     turnover_data = turnover.get_all_values()
     regression_data = regression.get_all_values()
-    # find data and operate with them
+    # Create 3 empty lists to save turnover_data and regression_data
     listshareturnover = []
     listkeytravellers = []
     listkeypassengers = []
+    # find and save turnover_data on turnover worksheet
     for k in range(1, 7):
         shareturnover = convert_to_float(turnover_data[k][2].replace(',', '.'))
         listshareturnover.append(shareturnover)
-
+    # find and save regression_data on regression worksheet, 2 columns
     for l in range(2, 8):
         key_sharetravellers = convert_to_float(regression_data[l][5].replace(',', '.'))
         listkeytravellers.append(key_sharetravellers)
         key_sharepassengers = convert_to_float(regression_data[l][6].replace(',', '.'))
         listkeypassengers.append(key_sharepassengers)
-
-
+    # Create 4 empty lists to save following data
     listnew3 = []
     listnew4 = []
     listnew5 = []
     listkeys = []
-    # Loop through all rows of "Structure_3" only companies
+    # Loop through all rows of "Structure_3", by companies only
     for m in range(1, 6):
         # Capture the returned values from operate_data_key() function
         listkeystructure3t, listkeystructure3pk = operate_data_key(m)
+        # Operate on captured value and data from regression data first saved column
         for x, y in zip(listkeytravellers, listkeystructure3t):
             multipl1 = x * y
             listnew3.append(multipl1)
-
+        # Operate on captured value and data from regression data second saved column
         for w, z in zip(listkeypassengers, listkeystructure3pk):
             multipl2 = w * z
             listnew4.append(multipl2)
-
+        # Operate on the lists generated by the 2 first "for" instances
         for a, b in zip(listnew3, listnew4):
             additi = a + b
             listnew5.append(additi)
-
+        # Operate on the list generated by the last "for" instances and turnover data
         for itemlist5, itemlistshare in zip(listnew5, listshareturnover):
             key = itemlist5 * itemlistshare 
             listkeys.append(key)
-        
+        # Sum partials keys
         finalcompanykey = round(sum(listkeys), 4)
+        # Find and save company name
         companyname = structure_3_data[m][0]
-
-        #print(f'listkeytravellers for {companyname} is : {listkeytravellers})')
-        #print('...next...')
-        #print(f'listkeystructure3t for {companyname} is : {listkeystructure3t})')
-        #print('...next...')
-        #print(f'multipl1 x * y for {companyname} is : {listnew3})')
-        #print('...next...')
-        #print(listkeypassengers)
-        #print('...next...')
-        #print(listkeystructure3pk)
-        #print('...next...')
-        #print(listnew4)
-        #print('...next...')
-        #print(listnew5)
-        #print('...next...')
-        #print(listshareturnover)
-        #print('...next...')
-        #print(listkeys)
         print(f'...final {companyname} key is : {finalcompanykey}')
-        
         # Update keys worksheet with finalcompanykey
         keysworksheet.update_cell((m + 1), 2, finalcompanykey)
         # Reset all lists of this function to empty
@@ -445,6 +397,9 @@ def calculate_keys():
         listkeys = []
 
 def operate_data_key(row):
+    """
+    Find and save as lists data from "Structure_3" worksheet depending on the index of the column 
+    """
     # Use the sheets "Structure_3, "Turnover", "Regression" and "Keys"
     structure_3 = SHEET2.worksheet("Structure_3")
     # Get data from the worksheets
@@ -461,9 +416,7 @@ def operate_data_key(row):
     return listkeystructure3t, listkeystructure3pk
 
 
-
-
-
+# minor functions
 def verify_significant(data1, data2):
     """
     Print a warning to the console if sum_t_significant is != T_significant (in worksheet Attendance)
@@ -504,6 +457,7 @@ def find_percentage(data, company, header):
         return 0.0
 
 
+# Global function
 def main():
     """
     Run all program functions
