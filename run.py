@@ -18,8 +18,10 @@ SHEET = GSPREAD_CLIENT.open('Portfolio3_distribution_keys')
 #CREDS2 = Credentials.from_service_account_file('creds2.json')
 #SCOPED_CREDS2 = CREDS2.with_scopes(SCOPE)
 #GSPREAD_CLIENT2 = gspread.authorize(SCOPED_CREDS2)
+#SHEET2 = GSPREAD_CLIENT2.open('Portfolio3_distribution_keys_2')
 SHEET2 = GSPREAD_CLIENT.open('Portfolio3_distribution_keys_2')
 
+print()
 
 # Main functions
 def calculate_t_significant():
@@ -463,8 +465,14 @@ def main():
     Run all program functions
     """
     calculate_t_significant()
+    print('Calculating columns F in worksheet "Attendance"')
     calculate_pk_significant()
+    print('Calculating columns G in worksheet "Attendance"')
     calculate_structure_2()
+    print('Calculating and updating entire worksheet "Structure_2"')
+    print('I could not find a way to get through the following "Ressource_Exhaust" without getting stuck with deployement in Heroku.')
+    print('But without Herku, in terminal this code I capable of manipulating to google sheet.')
+    print('In order to achieve this you simply need to uncomment lines 18 to 21 and comment out line 22.')
     update_sum_column_structure_2()
     calculate_percent_structure_3()
     calculate_average_km()
