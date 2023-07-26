@@ -9,7 +9,9 @@ This website is an idea that I received from someone I am following on LinkedIn 
 A fare community regroupes a lot of bus, train, boat companies. The question raised was how can we share the revenue of a ticket or subscription which valid on the whole network. 
 
 This app use data from two google sheet and performs calculations to get to the result! 
+
 google sheet 1 : Portfolio3_distribution_keys
+
 google sheet 2 : Portfolio3_distribution_keys_2
 
 The final keys on worksheet "Keys" must sum up to 100% when added.
@@ -17,32 +19,31 @@ The final keys on worksheet "Keys" must sum up to 100% when added.
 Unfortunately, there is a limitation to what a user can write into google sheet through 1 google project. This is the reason why I used two separate google sheet. Unfortunately Herku does not allow me to use more than 1 credential .json file. 
 
 ## Features:
-<img src="assets/images/Portfolio2_Readme_Feature1.jpg" alt="ReadmePicture2">
 
 This app contains 1 global function, 12 major functions and 4 minor functions.
 
 The global function calls the 12 major and the 12 major call the 4 minor for calulation purpose.
 
 The global function is called: 
-<ul>main</ul>
+<li>main</li>
 The 12 major functions are called: 
-<ol>calculate_t_significant</ol>
-<ol>calculate_pk_significant</ol>
-<ol>calculate_structure_2</ol>
-<ol>update_sum_column_structure_2</ol>
-<ol>calculate_percent_structure_3</ol>
-<ol>alculate_average_km</ol>
-<ol>calculate_regression</ol>
-<ol>calculate_total_average_pk</ol>
-<ol>calculate_totalprice</ol>
-<ol>calculate_sharetravellers</ol>
-<ol>calculate_sharePassengerkilometers</ol>
-<ol>calculate_keys</ol>
+<li>calculate_t_significant</li>
+<li>calculate_pk_significant</li>
+<li>calculate_structure_2</li>
+<li>update_sum_column_structure_2</li>
+<li>calculate_percent_structure_3</li>
+<li>alculate_average_km</li>
+<li>calculate_regression</li>
+<li>calculate_total_average_pk</li>
+<li>calculate_totalprice</li>
+<li>calculate_sharetravellers</li>
+<li>calculate_sharePassengerkilometers</li>
+<li>calculate_keys</li>
 The 4 minor functions are called:
-<ol>verify_significant</ol>
-<ol>convert_to_int</ol>
-<ol>convert_to_float</ol>
-<ol>find_percentage</ol>
+<li>verify_significant</li>
+<li>convert_to_int</li>
+<li>convert_to_float</li>
+<li>find_percentage</li>
 
 ## Testing:
 buggs : 
