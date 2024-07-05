@@ -4,6 +4,8 @@
 
 ## Project description
 
+
+
 This website is an idea that I received from someone I am following on LinkedIn who works for public transportation. He asked his network a very interesting question. This project tries to answer that question.
 
 A fare community regroupes a lot of bus, train, boat companies. The question raised was how can we share the revenue of a ticket or subscription which valid on the whole network. 
@@ -64,6 +66,11 @@ buggs :
 - pandas (fonction "Calculate_regression")
 
 ## Credits
+https://www.kaggle.com/datasets/dfydata/the-online-plain-text-english-dictionary-opted?resource=download
+The Online Plain Text English Dictionary (OPTED)
+Dictionary in CSV Format Based on the Webster's Dictionary 1913 Edition
+Content
+This is the full OPTED version of a Public Domain dictionary based on the Webster's Unabridged Dictionary, 1913 edition. The CSV file contains all entries, along with the character count for each word, the Part of Speech, and the Definition.
 
 ### Code
 
