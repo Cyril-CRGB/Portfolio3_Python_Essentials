@@ -1,24 +1,21 @@
 # Portfolio 3 - Python Essential
 
-## Distribution key calculator
+## Word guess game
 
 ## Project description
 
+This website is a word game based on a free english dictionary. 
 
+The goal for the end user is to test his/her knowledges of the english language, and learn new words.
 
-This website is an idea that I received from someone I am following on LinkedIn who works for public transportation. He asked his network a very interesting question. This project tries to answer that question.
+The client can chose between two ways of playing. Either try to guess the definition of a given word, or the opposite, try to guess a word of a given definition.
 
-A fare community regroupes a lot of bus, train, boat companies. The question raised was how can we share the revenue of a ticket or subscription which valid on the whole network. 
+Word and definition that the client is looking for are randomly chosen and given by the programm.
 
-This app use data from two google sheet and performs calculations to get to the result! 
+The client can then chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the programm. No repeatition is allowed. The solution suggested by the programm must be different from one another.
 
-google sheet 1 : Portfolio3_distribution_keys
+Have fun with the game, and learn new words!
 
-google sheet 2 : Portfolio3_distribution_keys_2
-
-The final keys on worksheet "Keys" must sum up to 100% when added.
-
-Unfortunately, there is a limitation to what a user can write into google sheet through 1 google project. This is the reason why I used two separate google sheet. Unfortunately Herku does not allow me to use more than 1 credential .json file. 
 
 ## Features:
 
@@ -49,12 +46,13 @@ The 4 minor functions are called:
 
 ## Testing:
 buggs : 
-- could not access rows with "row['sheetname']", needed to use index
-- cant convert string to float with "float(string)", I need to replace "," by "."
-- cant convert null to integers or float, need to writh to try-except fonction to handle each of them
-- cant use function convert_to_float to convert percent
-- dealing with 'status' : 'RESOURCE_EXHAUSTED' from 'sheets.googleapis.com'
-- dealing with 'cannot find creds2.json' after deploying on heroku
+- I noticed that the data used had flaws in it. For instance nine time the letter A, and with that all the letters of the alphabet. Which I found redoundant. Therefore I decided to get ride of them.
+- I noticed that there were POS (word positions) that had simply no position, it only contained empty braquets "". 
+- I also noticed that some entry in the data were missing or contained - #NAME? - witch I decided to remove.
+- I noticed that some word where repeated for each definition they can have. I decided to leave them out too. 
+
+Thus I decided to analyse the data further to insure the data was meaningfull for the purpose of the game. I created a new python file called "datacleaning.py", and I duplicated the sheet of my googlesheet, renamed it "Original.." in order to keep trac of the modification of the data.
+
 
 ## Technologies Used
 
