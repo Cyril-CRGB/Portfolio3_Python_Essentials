@@ -46,10 +46,19 @@ The 4 minor functions are called:
 
 ## Testing:
 buggs : 
-- I noticed that the data used had flaws in it. For instance nine time the letter A, and with that all the letters of the alphabet. Which I found redoundant. Therefore I decided to get ride of them.
-- I noticed that there were POS (word positions) that had simply no position, it only contained empty braquets "". 
-- I also noticed that some entry in the data were missing or contained - #NAME? - witch I decided to remove.
-- I noticed that some word where repeated for each definition they can have. I decided to leave them out too. 
+I noticed that the data used had flaws in it. For instance 
+- There is nine time the letter A, and with that all the letters of the alphabet. Which I found redoundant. Therefore I decided to get ride of them.
+- There were POS (word positions) that had simply no position, it only contained empty braquets "". 
+    -> solution: 
+            1) erase the "" from database, not working I reached APIError [429]: Quota exceeded for quota metric
+            2) include exception for the programm to exclude empty POS to be selected for the game
+- That some entry in the data were missing or contained - #NAME? - witch I decided to remove.
+    -> solution:
+            1) remove the rows that contains an error, not working I reached APIError [429]: Quota exceeded for quota metric
+            2) include exception for the programm to exclude meaningless word as - #NAME? - 
+- That some POS (word positions) where unique, or reversed and could be joined to another without loosing much meaning: "n. & v.", "v. & n." and "n. & v. t."
+
+- That some word where repeated for each definition they can have. I decided to leave them out too. 
 
 Thus I decided to analyse the data further to insure the data was meaningfull for the purpose of the game. I created a new python file called "datacleaning.py", and I duplicated the sheet of my googlesheet, renamed it "Original.." in order to keep trac of the modification of the data.
 

@@ -94,12 +94,12 @@ def guess_definition():
 
 # Main game loop
 def main():
-    # print("Welcome to the Word Guessing Game!")
-    # while True:
-    #    print("\nChoose an option:")
-    #    print("1. Guess the word from a definition")
-    #    print("2. Guess the definition from a word")
-    #    print("3. Exit")
+     print("Welcome to the Word Guessing Game!")
+     while True:
+        print("\nChoose an option:")
+        print("1. Guess the word from a definition")
+        print("2. Guess the definition from a word")
+        print("3. Exit")
         choice = input("Enter your choice (1, 2, or 3): ")
 
         if choice == '1':
