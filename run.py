@@ -21,11 +21,14 @@ the_dictionary = SHEET.worksheet('OPTED_Dictionary_sheet')
 # Fetch all data
 data = the_dictionary.get_all_values()
 
-# Convert data to a list of dictionaries for easier access
-dictionary_data = [
-    {"Word": row[0], "Count": row[1], "POS": row[2], "Definition": row[3]}
-    for row in data[1:] # Skipping the header row
-]
+# Convert data to a list of dictionaries for easier access, excluding rows with empyt "POS" and duplicate words
+seen_words = set()
+dictionary_data = []
+for row in data[1:]: # skipping the header row
+    word, count, pos, definition = row[0], row[1], row[2], row[3]
+    if pos and word not in seen_words:
+        dictionary_data.append({"Word": word, "Count": count, "POS": pos, "Definition": definition})
+        seen_words.add(word)
 
 # Function to get random options for multiple choice
 def get_random_options(correct_word):
@@ -43,21 +46,25 @@ def guess_word():
     options.append(correct_word)
     random.shuffle(options)
 
-    print(f"Definition: {definition}")
-    print("Choose the correct word:")
+    print(f"\nDefinition: {definition}")
+    print("\nChoose the correct word:")
     for i, option in enumerate(options):
         print(f"{i+1}. {option}")
 
-    guess = input("Enter the number of your choice: ")
-
-    try:
-        guess_index = int(guess) - 1
-        if options[guess_index].lower() == correct_word.lower():
-            print("Correct!")
-        else:
-            print(f"Incorrect. The correct word was '{correct_word}'.")
-    except(ValueError, IndexError):
-        print("Invalid input. Please enter a number corresponding to your choice.")
+    while True: # Dealing with bad input
+        guess = input("\nEnter the number of your choice: ")
+        try:
+            guess_index = int(guess) - 1
+            if 0 <= guess_index < len(options):
+                if options[guess_index].lower() == correct_word.lower():
+                    print("\nCorrect!\n")
+                else:
+                    print(f"\nIncorrect. The correct word was '{correct_word}'.\n")
+                break # Exit loop after a valid guess
+            else:
+                print("\nInvalid choice. Please enter a number corresponding to your choice.\n")
+        except ValueError:
+            print("\nInvalid input. Please enter a number.\n")
 
 # Function to get random options for multiple choice
 def get_random_options_definition(correct_definition):
@@ -76,38 +83,42 @@ def guess_definition():
     options.append(correct_definition)
     random.shuffle(options)
 
-    print(f"Word: {word}")
-    print("Choose the correct definition:")
+    print(f"\nWord: {word}")
+    print("\nChoose the correct definition:")
     for i, option in enumerate(options):
         print(f"{i+1}. {option}")
 
-    guess = input("Enter the number of your choice: ")
-    
-    try:
-        guess_index = int(guess) - 1
-        if options[guess_index].lower() == correct_definition.lower():
-            print("Correct!")
-        else:
-            print(f"Incorrect. The correct word was '{correct_definition}'.")
-    except(ValueError, IndexError):
-        print("Invalid input. Please enter a number corresponding to your choice.")
+    while True: # Dealing with bad input
+        guess = input("\nEnter the number of your choice: ")
+        try:
+            guess_index = int(guess) - 1
+            if 0 <= guess_index < len(options):
+                if options[guess_index].lower() == correct_definition.lower():
+                    print("\nCorrect!\n")
+                else:
+                    print(f"\nIncorrect. The correct word was '{correct_definition}'.\n")
+                break # Exit loop after a valid guess
+            else:
+                print("\nInvalid input. Please enter a number corresponding to your choice.\n")
+        except ValueError:
+            print("\nInvalid input. Please enter a number.\n")
 
 # Main game loop
 def main():
-     print("Welcome to the Word Guessing Game!")
+     print("\nWelcome to the Word Guessing Game!\n")
      while True:
         print("\nChoose an option:")
-        print("1. Guess the word from a definition")
-        print("2. Guess the definition from a word")
-        print("3. Exit")
-        choice = input("Enter your choice (1, 2, or 3): ")
+        print("\n1. Guess the word from a definition")
+        print("\n2. Guess the definition from a word")
+        print("\n3. Exit")
+        choice = input("\nEnter your choice (1, 2, or 3): ")
 
         if choice == '1':
             guess_word()
         elif choice == '2':
             guess_definition()
         elif choice == '3':
-            print("Thanks for playing!")
+            print("\nThanks for playing!")
             break
         else:
             print("\nInvalid choice. Please try again.")
