@@ -37,34 +37,44 @@ def get_random_options(correct_word):
 
 # Function to guess the word from a given definition with multiple choice options
 def guess_word():
-    entry = random.choice(dictionary_data)
-    correct_word = entry['Word']
-    definition = entry['Definition']
+    while True: # Allowing the player to keep playing until is done
+        entry = random.choice(dictionary_data)
+        correct_word = entry['Word']
+        definition = entry['Definition']
 
-    # Get random options exlcuding the correct word
-    options = get_random_options(correct_word)
-    options.append(correct_word)
-    random.shuffle(options)
+        # Get random options exlcuding the correct word
+        options = get_random_options(correct_word)
+        options.append(correct_word)
+        random.shuffle(options)
 
-    print(f"\nDefinition: {definition}")
-    print("\nChoose the correct word:")
-    for i, option in enumerate(options):
-        print(f"{i+1}. {option}")
+        print(f"\nDefinition: {definition}")
+        print("\nMake your choice:")
+        for i, option in enumerate(options):
+            print(f"{i+1}. {option}")
 
-    while True: # Dealing with bad input
-        guess = input("\nEnter the number of your choice: ")
-        try:
-            guess_index = int(guess) - 1
-            if 0 <= guess_index < len(options):
-                if options[guess_index].lower() == correct_word.lower():
-                    print("\nCorrect!\n")
+        # Adding two options to make the game funnier
+        print("\nor")
+        print(f"{len(options)+1}. Change gameplay")
+        print(f"{len(options)+2}. Quit")
+
+        while True: # Dealing with bad input
+            guess = input("\nEnter the number of your choice: ")
+            try:
+                guess_index = int(guess) - 1
+                if 0 <= guess_index < len(options):
+                    if options[guess_index].lower() == correct_word.lower():
+                        print("\nCorrect!\n")
+                    else:
+                        print(f"\nIncorrect. The correct word was '{correct_word}'.\n")
+                    break # Exit loop after a valid guess
+                elif guess_index == len(options):
+                    return "change"
+                elif guess_index == len(options) + 1:
+                    return "quit"
                 else:
-                    print(f"\nIncorrect. The correct word was '{correct_word}'.\n")
-                break # Exit loop after a valid guess
-            else:
-                print("\nInvalid choice. Please enter a number corresponding to your choice.\n")
-        except ValueError:
-            print("\nInvalid input. Please enter a number.\n")
+                    print("\nInvalid choice. Please enter a number corresponding to your choice.\n")
+            except ValueError:
+                print("\nInvalid input. Please enter a number.\n")
 
 # Function to get random options for multiple choice
 def get_random_options_definition(correct_definition):
@@ -74,52 +84,83 @@ def get_random_options_definition(correct_definition):
 
 # Function to guess the definition from a given word with multiple choice options
 def guess_definition():
-    entry = random.choice(dictionary_data)
-    word = entry['Word']
-    correct_definition = entry['Definition']
+    while True: # Allowing the player to keep playing until is done
+        entry = random.choice(dictionary_data)
+        word = entry['Word']
+        correct_definition = entry['Definition']
 
-    # Get random options exlcuding the correct definition
-    options = get_random_options(correct_definition)
-    options.append(correct_definition)
-    random.shuffle(options)
+        # Get random options exlcuding the correct definition
+        options = get_random_options(correct_definition)
+        options.append(correct_definition)
+        random.shuffle(options)
 
-    print(f"\n\nWord: {word}")
-    print("\nChoose the correct definition:")
-    for i, option in enumerate(options):
-        print(f"{i+1}. {option}")
+        print(f"\n\nWord: {word}")
+        print("\nMake your choice:")
+        for i, option in enumerate(options):
+            print(f"{i+1}. {option}")
 
-    while True: # Dealing with bad input
-        guess = input("\nEnter the number of your choice: ")
-        try:
-            guess_index = int(guess) - 1
-            if 0 <= guess_index < len(options):
-                if options[guess_index].lower() == correct_definition.lower():
-                    print("\nCorrect!\n")
+        # Adding two options to make the game funnier
+        print("\nor")
+        print(f"{len(options)+1}. Change gameplay")
+        print(f"{len(options)+2}. Quit")
+
+        while True: # Dealing with bad input
+            guess = input("\nEnter the number of your choice: ")
+            try:
+                guess_index = int(guess) - 1
+                if 0 <= guess_index < len(options):
+                    if options[guess_index].lower() == correct_definition.lower():
+                        print("\nCorrect!\n")
+                    else:
+                        print(f"\nIncorrect. The correct word was '{correct_definition}'.\n")
+                    break # Exit loop after a valid guess
+                elif guess_index == len(options):
+                    return "change"
+                elif guess_index == len(options) + 1:
+                    return "quit"
                 else:
-                    print(f"\nIncorrect. The correct word was '{correct_definition}'.\n")
-                break # Exit loop after a valid guess
-            else:
-                print("\nInvalid input. Please enter a number corresponding to your choice.\n")
-        except ValueError:
-            print("\nInvalid input. Please enter a number.\n")
+                    print("\nInvalid input. Please enter a number corresponding to your choice.\n")
+            except ValueError:
+                print("\nInvalid input. Please enter a number.\n")
 
 # Main game loop
 def main():
-     print("\nWelcome to the Word Guessing Game! Wanna play?")
+     
      while True:
-        print("\nChoose a gameplay:")
-        print("1. Guess the word from a definition")
-        print("2. Guess the definition from a word")
-        print("3. Exit")
-        choice = input("\nEnter your choice (1, 2, or 3): ")
+        print("\nWelcome to the Word Guessing Game! Wanna play?")
+        choice = input("\nYes(y) or No(n): ")
+        if choice.lower() == 'y':
+            while True:
+                print("\nNice! Choose a gameplay:")
+                print("1. Guess the word from a definition")
+                print("2. Guess the definition from a word")
+                print("3. Exit")
+                gameplay_choice = input("\nEnter your choice (1, 2, or 3): ")
 
-        if choice == '1':
-            guess_word()
-        elif choice == '2':
-            guess_definition()
-        elif choice == '3':
-            print("\nThanks for playing!")
-            break
+                if gameplay_choice == '1':
+                    while True:
+                        result = guess_word()
+                        if result == "change":
+                            break
+                        elif result == "quit":
+                            print("\nThanks for playing!")
+                            return
+                elif gameplay_choice == '2':
+                    while True:
+                        result = guess_definition()
+                        if result == "change":
+                            break
+                        elif result == "quit":
+                            print("\nThanks for playing!")
+                            return
+                elif gameplay_choice == '3':
+                    print("\nThanks for playing!")
+                    return
+                else:
+                    print("\nInvalid choice. Please try again.")
+        elif choice.lower() == 'n':
+            print("\nToo sad :( we hope to see you soon!")
+            return        
         else:
             print("\nInvalid choice. Please try again.")
         
