@@ -175,10 +175,12 @@ def main():
                         elif result == "quit":
                             clear_console() # Making space and the game more enjoyable
                             print("\nThanks for playing!\n")
+                            print("\nTo play again, click on 'run programm'\n")
                             return
                 elif gameplay_choice == '3':
                     clear_console() # Making space and the game more enjoyable
                     print("\nThanks for playing!\n")
+                    print("\nTo play again, click on 'run programm'\n")
                     return
                 else:
                     clear_console() # Making space and the game more enjoyable
@@ -186,6 +188,7 @@ def main():
         elif choice.lower() == 'n':
             clear_console() # Making space and the game more enjoyable
             print("\nToo sad :( we hope to see you soon!\n")
+            print("\nTo play again, click on 'run programm'\n")
             return        
         else:
             clear_console() # Making space and the game more enjoyable
