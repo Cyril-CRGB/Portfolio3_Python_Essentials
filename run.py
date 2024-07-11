@@ -1,6 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import random
+import os
+import platform
 
 
 SCOPE = [
@@ -21,7 +23,7 @@ the_dictionary = SHEET.worksheet('OPTED_Dictionary_sheet')
 # Fetch all data
 data = the_dictionary.get_all_values()
 
-# Convert data to a list of dictionaries for easier access, excluding rows with empyt "POS" and duplicate words
+# Convert data to a list of dictionaries for easier access, excluding rows with empty "POS" and duplicate words
 seen_words = set()
 dictionary_data = []
 for row in data[1:]: # skipping the header row
@@ -29,6 +31,14 @@ for row in data[1:]: # skipping the header row
     if pos and word not in seen_words:
         dictionary_data.append({"Word": word, "Count": count, "POS": pos, "Definition": definition})
         seen_words.add(word)
+
+# Function to clear_console
+def clear_console():
+    os_system = platform.system()
+    if os_system == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 # Function to get random options for multiple choice
 def get_random_options(correct_word):
@@ -38,6 +48,7 @@ def get_random_options(correct_word):
 # Function to guess the word from a given definition with multiple choice options
 def guess_word():
     while True: # Allowing the player to keep playing until is done
+        clear_console() # Making space and the game more enjoyable
         entry = random.choice(dictionary_data)
         correct_word = entry['Word']
         definition = entry['Definition']
@@ -47,13 +58,14 @@ def guess_word():
         options.append(correct_word)
         random.shuffle(options)
 
-        print(f"\nDefinition: {definition}")
-        print("\nMake your choice:")
+        print("\nDefinition:")
+        print(f"\n-->     {definition}")
+        print("\nChoose the right definition:")
         for i, option in enumerate(options):
             print(f"{i+1}. {option}")
 
         # Adding two options to make the game funnier
-        print("\nor")
+        print("----or-----------")
         print(f"{len(options)+1}. Change gameplay")
         print(f"{len(options)+2}. Quit")
 
@@ -85,6 +97,7 @@ def get_random_options_definition(correct_definition):
 # Function to guess the definition from a given word with multiple choice options
 def guess_definition():
     while True: # Allowing the player to keep playing until is done
+        clear_console() # Making space and the game more enjoyable
         entry = random.choice(dictionary_data)
         word = entry['Word']
         correct_definition = entry['Definition']
@@ -94,13 +107,14 @@ def guess_definition():
         options.append(correct_definition)
         random.shuffle(options)
 
-        print(f"\n\nWord: {word}")
-        print("\nMake your choice:")
+        print("\nWord:")
+        print(f"\n-->     {word}")
+        print("\nChoose the right word:")
         for i, option in enumerate(options):
             print(f"{i+1}. {option}")
 
         # Adding two options to make the game funnier
-        print("\nor")
+        print("----or-----------")
         print(f"{len(options)+1}. Change gameplay")
         print(f"{len(options)+2}. Quit")
 
@@ -125,25 +139,26 @@ def guess_definition():
 
 # Main game loop
 def main():
-     
-     while True:
-        print("\nWelcome to the Word Guessing Game! Wanna play?")
+    clear_console() # Making space and the game more enjoyable
+    print("\nWelcome to the Word Guessing Game! Wanna play?")
+    while True:
         choice = input("\nYes(y) or No(n): ")
         if choice.lower() == 'y':
+            clear_console() # Making space and the game more enjoyable
             while True:
                 print("\nNice! Choose a gameplay:")
                 print("1. Guess the word from a definition")
                 print("2. Guess the definition from a word")
                 print("3. Exit")
                 gameplay_choice = input("\nEnter your choice (1, 2, or 3): ")
-
                 if gameplay_choice == '1':
                     while True:
                         result = guess_word()
                         if result == "change":
                             break
                         elif result == "quit":
-                            print("\nThanks for playing!")
+                            clear_console() # Making space and the game more enjoyable
+                            print("\nThanks for playing!\n")
                             return
                 elif gameplay_choice == '2':
                     while True:
@@ -151,18 +166,22 @@ def main():
                         if result == "change":
                             break
                         elif result == "quit":
-                            print("\nThanks for playing!")
+                            clear_console() # Making space and the game more enjoyable
+                            print("\nThanks for playing!\n")
                             return
                 elif gameplay_choice == '3':
-                    print("\nThanks for playing!")
+                    clear_console() # Making space and the game more enjoyable
+                    print("\nThanks for playing!\n")
                     return
                 else:
-                    print("\nInvalid choice. Please try again.")
+                    print("\nInvalid choice. Please try again.\n")
         elif choice.lower() == 'n':
-            print("\nToo sad :( we hope to see you soon!")
+            clear_console() # Making space and the game more enjoyable
+            print("\nToo sad :( we hope to see you soon!\n")
             return        
         else:
             print("\nInvalid choice. Please try again.")
+
         
         
 if __name__ == "__main__":
