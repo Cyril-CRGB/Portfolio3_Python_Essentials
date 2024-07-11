@@ -81,8 +81,7 @@ By the functions "guess_word" and "guess_definition", if an Invalid input is giv
 
 ## Special library
 
-- numpy (fonction "Calculate_regression")
-- pandas (fonction "Calculate_regression")
+- none
 
 ## Credits
 https://www.kaggle.com/datasets/dfydata/the-online-plain-text-english-dictionary-opted?resource=download

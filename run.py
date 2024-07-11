@@ -83,7 +83,7 @@ def guess_definition():
     options.append(correct_definition)
     random.shuffle(options)
 
-    print(f"\nWord: {word}")
+    print(f"\n\nWord: {word}")
     print("\nChoose the correct definition:")
     for i, option in enumerate(options):
         print(f"{i+1}. {option}")
@@ -105,12 +105,12 @@ def guess_definition():
 
 # Main game loop
 def main():
-     print("\nWelcome to the Word Guessing Game!\n")
+     print("\nWelcome to the Word Guessing Game! Wanna play?")
      while True:
-        print("\nChoose an option:")
-        print("\n1. Guess the word from a definition")
-        print("\n2. Guess the definition from a word")
-        print("\n3. Exit")
+        print("\nChoose a gameplay:")
+        print("1. Guess the word from a definition")
+        print("2. Guess the definition from a word")
+        print("3. Exit")
         choice = input("\nEnter your choice (1, 2, or 3): ")
 
         if choice == '1':
