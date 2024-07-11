@@ -40,75 +40,29 @@ def clear_console():
     else:
         os.system("clear")
 
-# Function to get random options for multiple choice
-def get_random_options(correct_word):
-    words = [entry['Word'] for entry in dictionary_data if entry['Word'] != correct_word]
-    return random.sample(words, 2)
+#get_random_options
+#get_random_options_definition
+
+# Unified function to get random options for multiple choice
+def get_random_options(correct_value, field):
+    values = [entry[field] for entry in dictionary_data if entry[field] != correct_value]
+    return random.sample(values, 2)
 
 # Function to guess the word from a given definition with multiple choice options
 def guess_word():
+    clear_console() # Making space and the game more enjoyable
     while True: # Allowing the player to keep playing until is done
-        clear_console() # Making space and the game more enjoyable
         entry = random.choice(dictionary_data)
         correct_word = entry['Word']
         definition = entry['Definition']
 
         # Get random options exlcuding the correct word
-        options = get_random_options(correct_word)
+        options = get_random_options(correct_word, 'Word')
         options.append(correct_word)
         random.shuffle(options)
 
         print("\nDefinition:")
         print(f"\n-->     {definition}")
-        print("\nChoose the right definition:")
-        for i, option in enumerate(options):
-            print(f"{i+1}. {option}")
-
-        # Adding two options to make the game funnier
-        print("----or-----------")
-        print(f"{len(options)+1}. Change gameplay")
-        print(f"{len(options)+2}. Quit")
-
-        while True: # Dealing with bad input
-            guess = input("\nEnter the number of your choice: ")
-            try:
-                guess_index = int(guess) - 1
-                if 0 <= guess_index < len(options):
-                    if options[guess_index].lower() == correct_word.lower():
-                        print("\nCorrect!\n")
-                    else:
-                        print(f"\nIncorrect. The correct word was '{correct_word}'.\n")
-                    break # Exit loop after a valid guess
-                elif guess_index == len(options):
-                    return "change"
-                elif guess_index == len(options) + 1:
-                    return "quit"
-                else:
-                    print("\nInvalid choice. Please enter a number corresponding to your choice.\n")
-            except ValueError:
-                print("\nInvalid input. Please enter a number.\n")
-
-# Function to get random options for multiple choice
-def get_random_options_definition(correct_definition):
-    definitions = [entry['Definition'] for entry in dictionary_data if entry['Definition'] != correct_definition]
-    return random.sample(definitions, 2)
-
-
-# Function to guess the definition from a given word with multiple choice options
-def guess_definition():
-    while True: # Allowing the player to keep playing until is done
-        clear_console() # Making space and the game more enjoyable
-        entry = random.choice(dictionary_data)
-        word = entry['Word']
-        correct_definition = entry['Definition']
-
-        # Get random options exlcuding the correct definition
-        options = get_random_options(correct_definition)
-        options.append(correct_definition)
-        random.shuffle(options)
-
-        print("\nWord:")
-        print(f"\n-->     {word}")
         print("\nChoose the right word:")
         for i, option in enumerate(options):
             print(f"{i+1}. {option}")
@@ -123,9 +77,59 @@ def guess_definition():
             try:
                 guess_index = int(guess) - 1
                 if 0 <= guess_index < len(options):
-                    if options[guess_index].lower() == correct_definition.lower():
+                    if options[guess_index].lower() == correct_word.lower():
+                        clear_console() # Making space and the game more enjoyable
                         print("\nCorrect!\n")
                     else:
+                        clear_console() # Making space and the game more enjoyable
+                        print(f"\nIncorrect. The correct word was '{correct_word}'.\n")
+                    break # Exit loop after a valid guess
+                elif guess_index == len(options):
+                    return "change"
+                elif guess_index == len(options) + 1:
+                    return "quit"
+                else:
+                    clear_console() # Making space and the game more enjoyable
+                    print("\nInvalid choice. Please enter a number corresponding to your choice.\n")
+            except ValueError:
+                clear_console() # Making space and the game more enjoyable
+                print("\nInvalid input. Please enter a number.\n")
+
+
+# Function to guess the definition from a given word with multiple choice options
+def guess_definition():
+    clear_console() # Making space and the game more enjoyable
+    while True: # Allowing the player to keep playing until is done
+        entry = random.choice(dictionary_data)
+        word = entry['Word']
+        correct_definition = entry['Definition']
+
+        # Get random options exlcuding the correct definition
+        options = get_random_options(correct_definition, 'Definition')
+        options.append(correct_definition)
+        random.shuffle(options)
+
+        print("\nWord:")
+        print(f"\n-->     {word}")
+        print("\nChoose the right definition:")
+        for i, option in enumerate(options):
+            print(f"{i+1}. {option}")
+
+        # Adding two options to make the game funnier
+        print("----or-----------")
+        print(f"{len(options)+1}. Change gameplay")
+        print(f"{len(options)+2}. Quit")
+
+        while True: # Dealing with bad input
+            guess = input("\nEnter the number of your choice: ")
+            try:
+                guess_index = int(guess) - 1
+                if 0 <= guess_index < len(options):
+                    if options[guess_index].lower() == correct_definition.lower():
+                        clear_console() # Making space and the game more enjoyable
+                        print("\nCorrect!\n")
+                    else:
+                        clear_console() # Making space and the game more enjoyable
                         print(f"\nIncorrect. The correct word was '{correct_definition}'.\n")
                     break # Exit loop after a valid guess
                 elif guess_index == len(options):
@@ -133,9 +137,12 @@ def guess_definition():
                 elif guess_index == len(options) + 1:
                     return "quit"
                 else:
+                    clear_console() # Making space and the game more enjoyable
                     print("\nInvalid input. Please enter a number corresponding to your choice.\n")
             except ValueError:
+                clear_console() # Making space and the game more enjoyable
                 print("\nInvalid input. Please enter a number.\n")
+
 
 # Main game loop
 def main():
@@ -174,12 +181,14 @@ def main():
                     print("\nThanks for playing!\n")
                     return
                 else:
+                    clear_console() # Making space and the game more enjoyable
                     print("\nInvalid choice. Please try again.\n")
         elif choice.lower() == 'n':
             clear_console() # Making space and the game more enjoyable
             print("\nToo sad :( we hope to see you soon!\n")
             return        
         else:
+            clear_console() # Making space and the game more enjoyable
             print("\nInvalid choice. Please try again.")
 
         
