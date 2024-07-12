@@ -35,7 +35,8 @@ This app contains 7 functions, including the main fonction.
 
 
 ## Testing:
-### buggs : 
+
+### Buggs : 
 I noticed that the data used had flaws in it. For instance 
 - There is nine time the letter A, and with that all the letters of the alphabet. Which I found redoundant. Therefore I decided to deal with them.
     -> SOLUTION:
@@ -73,7 +74,7 @@ By the functions "guess_word" and "guess_definition", if an Invalid input is giv
         a) Invalid input = "z"
            Output = coming back! with error message
 
-                <img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">
+                ![<img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">](https://)
 
         b) Valid input = "n"
            Output = quit!
