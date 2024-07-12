@@ -138,7 +138,7 @@ def guess_definition():
                         print("Let's play again!")
                     else:
                         clear_console() # Making space and the game more enjoyable
-                        print(f"\nIncorrect. The correct word was '{correct_definition}'.")
+                        print(f"\nIncorrect. The correct definition was '{correct_definition}'.")
                         print("Try the next one.")
                     break # Exit loop after a valid guess
                 elif guess_index == len(options):

@@ -61,48 +61,38 @@ By the functions "guess_word" and "guess_definition", if an Invalid input is giv
 Testing response from the programm:
 1) first question "yes/no":
         a)      Invalid input = "z"
-                <img src="Readmepics/Printscreen_1.jpg" alt="ReadmePicture1">
                 Output = coming back! with error message
                 <img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">
         b)      Valid input = "n"
-                <img src="Readmepics/Printscreen_3.jpg" alt="ReadmePicture3">
                 Output = quit!
                 <img src="Readmepics/Printscreen_4.jpg" alt="ReadmePicture4">
         c)      Valid input = "y"
-                <img src="Readmepics/Printscreen_5.jpg" alt="ReadmePicture5">
                 Output = game!
                 <img src="Readmepics/Printscreen_6.jpg" alt="ReadmePicture6">
 
 2) second question "choose a gameplay":
         a)      Invalid input = "8"
-                <img src="Readmepics/Printscreen_7.jpg" alt="ReadmePicture7">
                 Output = coming back! with error message
                 <img src="Readmepics/Printscreen_8.jpg" alt="ReadmePicture8">
         b)      Valid input = "1"
-                <img src="Readmepics/Printscreen_9.jpg" alt="ReadmePicture9">
                 Output = game question "Guess a word"
                 <img src="Readmepics/Printscreen_10.jpg" alt="ReadmePicture10">
         c)      Valid input = "2"
-                <img src="Readmepics/Printscreen_11.jpg" alt="ReadmePicture11">
                 Output = game question "Guess a definition"
                 <img src="Readmepics/Printscreen_12.jpg" alt="ReadmePicture12">
         d)      Valid input = "3"
-                <img src="Readmepics/Printscreen_13.jpg" alt="ReadmePicture13">
                 Output = exit game
                 <img src="Readmepics/Printscreen_14.jpg" alt="ReadmePicture14">
 
 3) game question "Guess a word":
         a)      Invalid input = "/////"
-                <img src="Readmepics/Printscreen_15.jpg" alt="ReadmePicture15">
                 Output = giving the possible choices again with error message
                 <img src="Readmepics/Printscreen_16.jpg" alt="ReadmePicture16">
         b)      Valid input = "1" to "3"
                 A) right answer:
-                        Input = "1"
                         Output = "Congrats! Your answer is Correct!" + next question
                         <img src="Readmepics/Printscreen_17.jpg" alt="ReadmePicture17">
                 B) wrong answer:
-                        Input = "3"
                         Output = "Incorrect. The correct word was ..." + next question
                         <img src="Readmepics/Printscreen_18.jpg" alt="ReadmePicture18">
         c)      Valid input = "4"
@@ -118,7 +108,16 @@ Testing response from the programm:
                 <img src="Readmepics/Printscreen_21.jpg" alt="ReadmePicture21">
         b)      Valid input "1" to "3"
                 A) right answer:
-                        Input = 
+                        <img src="Readmepics/Printscreen_22.jpg" alt="ReadmePicture22"> 
+                B) wrong answer:
+                        <img src="Readmepics/Printscreen_23.jpg" alt="ReadmePicture23"> 
+        c)      Valid input = "4"
+                Output = back to "Choose a gameplay" see point 2 above
+                <img src="Readmepics/Printscreen_24.jpg" alt="ReadmePicture24"> 
+        d)      Valid input = "5"
+                Output = exit game
+                <img src="Readmepics/Printscreen_25.jpg" alt="ReadmePicture25"> 
+                        
 
 
 
