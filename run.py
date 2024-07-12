@@ -79,10 +79,12 @@ def guess_word():
                 if 0 <= guess_index < len(options):
                     if options[guess_index].lower() == correct_word.lower():
                         clear_console() # Making space and the game more enjoyable
-                        print("\nCorrect!\n")
+                        print("\nCongrats! Your answer is Correct!")
+                        print("Let's play again!")
                     else:
                         clear_console() # Making space and the game more enjoyable
-                        print(f"\nIncorrect. The correct word was '{correct_word}'.\n")
+                        print(f"\nIncorrect. The correct word was '{correct_word}'.")
+                        print("Try the next one.")
                     break # Exit loop after a valid guess
                 elif guess_index == len(options):
                     return "change"
@@ -93,7 +95,12 @@ def guess_word():
                     print("\nInvalid choice. Please enter a number corresponding to your choice.\n")
             except ValueError:
                 clear_console() # Making space and the game more enjoyable
-                print("\nInvalid input. Please enter a number.\n")
+                print("\nInvalid input. Please enter a number amongs the list below.\n")
+                for i, option in enumerate(options):
+                    print(f"{i+1}. {option}")
+                print("----or-----------")
+                print(f"{len(options)+1}. Change gameplay")
+                print(f"{len(options)+2}. Quit")
 
 
 # Function to guess the definition from a given word with multiple choice options
@@ -127,10 +134,12 @@ def guess_definition():
                 if 0 <= guess_index < len(options):
                     if options[guess_index].lower() == correct_definition.lower():
                         clear_console() # Making space and the game more enjoyable
-                        print("\nCorrect!\n")
+                        print("\nCongrats! Your answer is Correct!")
+                        print("Let's play again!")
                     else:
                         clear_console() # Making space and the game more enjoyable
-                        print(f"\nIncorrect. The correct word was '{correct_definition}'.\n")
+                        print(f"\nIncorrect. The correct word was '{correct_definition}'.")
+                        print("Try the next one.")
                     break # Exit loop after a valid guess
                 elif guess_index == len(options):
                     return "change"
@@ -141,7 +150,28 @@ def guess_definition():
                     print("\nInvalid input. Please enter a number corresponding to your choice.\n")
             except ValueError:
                 clear_console() # Making space and the game more enjoyable
-                print("\nInvalid input. Please enter a number.\n")
+                print("\nInvalid input. Please enter a number amongs the list below.\n")
+                for i, option in enumerate(options):
+                    print(f"{i+1}. {option}")
+                print("----or-----------")
+                print(f"{len(options)+1}. Change gameplay")
+                print(f"{len(options)+2}. Quit")
+
+# Function to call the first question
+def first_question():
+    choice_first_question = input("\nYes(y) or No(n): ")
+    return choice_first_question
+
+
+# Function to call the second question
+def second_question():
+    print("\nNice! Choose a gameplay:")
+    print("1. Guess the word from a definition")
+    print("2. Guess the definition from a word")
+    print("3. Exit")
+    choice_second_question = input("\nEnter your choice (1, 2, or 3): ")
+    return choice_second_question
+
 
 
 # Main game loop
@@ -149,35 +179,39 @@ def main():
     clear_console() # Making space and the game more enjoyable
     print("\nWelcome to the Word Guessing Game! Wanna play?")
     while True:
-        choice = input("\nYes(y) or No(n): ")
-        if choice.lower() == 'y':
+        first_choice = first_question()
+        if first_choice.lower() == 'y':
             clear_console() # Making space and the game more enjoyable
             while True:
-                print("\nNice! Choose a gameplay:")
-                print("1. Guess the word from a definition")
-                print("2. Guess the definition from a word")
-                print("3. Exit")
-                gameplay_choice = input("\nEnter your choice (1, 2, or 3): ")
-                if gameplay_choice == '1':
+                #clear_console() # Making space and the game more enjoyable
+                second_choice = second_question()
+                if second_choice == '1':
+                    #clear_console() # Making space and the game more enjoyable
                     while True:
+                        clear_console() # Making space and the game more enjoyable
                         result = guess_word()
                         if result == "change":
-                            break
-                        elif result == "quit":
                             clear_console() # Making space and the game more enjoyable
-                            print("\nThanks for playing!\n")
-                            return
-                elif gameplay_choice == '2':
-                    while True:
-                        result = guess_definition()
-                        if result == "change":
                             break
                         elif result == "quit":
                             clear_console() # Making space and the game more enjoyable
                             print("\nThanks for playing!\n")
                             print("\nTo play again, click on 'run programm'\n")
                             return
-                elif gameplay_choice == '3':
+                elif second_choice == '2':
+                    #clear_console() # Making space and the game more enjoyable
+                    while True:
+                        clear_console() # Making space and the game more enjoyable
+                        result = guess_definition()
+                        if result == "change":
+                            clear_console() # Making space and the game more enjoyable
+                            break
+                        elif result == "quit":
+                            clear_console() # Making space and the game more enjoyable
+                            print("\nThanks for playing!\n")
+                            print("\nTo play again, click on 'run programm'\n")
+                            return
+                elif second_choice == '3':
                     clear_console() # Making space and the game more enjoyable
                     print("\nThanks for playing!\n")
                     print("\nTo play again, click on 'run programm'\n")
@@ -185,7 +219,8 @@ def main():
                 else:
                     clear_console() # Making space and the game more enjoyable
                     print("\nInvalid choice. Please try again.\n")
-        elif choice.lower() == 'n':
+
+        elif first_choice.lower() == 'n':
             clear_console() # Making space and the game more enjoyable
             print("\nToo sad :( we hope to see you soon!\n")
             print("\nTo play again, click on 'run programm'\n")
