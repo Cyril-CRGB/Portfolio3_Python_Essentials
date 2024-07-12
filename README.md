@@ -69,12 +69,13 @@ By the functions "guess_word" and "guess_definition", if an Invalid input is giv
 
 #### Testing response from the programm:
 
-1) first question "yes/no":
+
+1) first question "yes/no": 
 
         a) Invalid input = "z"
            Output = coming back! with error message
 
-                ![<img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">](https://)
+                <img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">
 
         b) Valid input = "n"
            Output = quit!
@@ -85,6 +86,7 @@ By the functions "guess_word" and "guess_definition", if an Invalid input is giv
            Output = game!
 
                 <img src="Readmepics/Printscreen_6.jpg" alt="ReadmePicture6">
+
 
 
 2) second question "choose a gameplay":
@@ -179,15 +181,16 @@ By the functions "guess_word" and "guess_definition", if an Invalid input is giv
 - none
 
 ## Credits
-https://www.kaggle.com/datasets/dfydata/the-online-plain-text-english-dictionary-opted?resource=download
-The Online Plain Text English Dictionary (OPTED)
-Dictionary in CSV Format Based on the Webster's Dictionary 1913 Edition
-Content
+
+The Online Plain Text English Dictionary (OPTED) [kaggle.com](https://www.kaggle.com/datasets/dfydata/the-online-plain-text-english-dictionary-opted?resource=download/)
+
+Dictionary in CSV Format Based on the Webster's Dictionary 1913 Edition.
+
 This is the full OPTED version of a Public Domain dictionary based on the Webster's Unabridged Dictionary, 1913 edition. The CSV file contains all entries, along with the character count for each word, the Part of Speech, and the Definition.
 
 ### Code
 
-- I found help on <https://stackoverflow.com/>
+- I found help on [stackoverflow.com](https://stackoverflow.com/)
 - I also used CodeInstitute examples
 
 ### Content
@@ -196,7 +199,7 @@ This is the full OPTED version of a Public Domain dictionary based on the Webste
 
 ### Media
 
-- no images were used for this project
+- no images were used for this project, appart from the readme file
 
 ## Deployment
 
