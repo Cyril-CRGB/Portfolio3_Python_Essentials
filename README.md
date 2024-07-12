@@ -25,8 +25,6 @@ Have fun with the game, and learn new words!
 
 This app contains 7 functions, including the main fonction.
 
-The global function calls the 12 major and the 12 major call the 4 minor for calulation purpose.
-
 1) clear_console(): allows to clear the command prompt in order to keep the command line as clean as possible, it makes easier to read the prompt 
 2) get_random_options(correct_value, field): allows to generate random values for the functions "guess_word" and "guess_definition"
 3) guess_word(): allows to get a question about a random word
