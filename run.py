@@ -32,6 +32,7 @@ for row in data[1:]: # skipping the header row
         dictionary_data.append({"Word": word, "Count": count, "POS": pos, "Definition": definition})
         seen_words.add(word)
 
+
 # Function to clear_console
 def clear_console():
     os_system = platform.system()
@@ -40,13 +41,12 @@ def clear_console():
     else:
         os.system("clear")
 
-#get_random_options
-#get_random_options_definition
 
 # Unified function to get random options for multiple choice
 def get_random_options(correct_value, field):
     values = [entry[field] for entry in dictionary_data if entry[field] != correct_value]
     return random.sample(values, 2)
+
 
 # Function to guess the word from a given definition with multiple choice options
 def guess_word():
@@ -55,23 +55,19 @@ def guess_word():
         entry = random.choice(dictionary_data)
         correct_word = entry['Word']
         definition = entry['Definition']
-
         # Get random options exlcuding the correct word
         options = get_random_options(correct_word, 'Word')
         options.append(correct_word)
         random.shuffle(options)
-
         print("\nDefinition:")
         print(f"\n-->     {definition}")
         print("\nChoose the right word:")
         for i, option in enumerate(options):
             print(f"{i+1}. {option}")
-
         # Adding two options to make the game funnier
         print("----or-----------")
         print(f"{len(options)+1}. Change gameplay")
         print(f"{len(options)+2}. Quit")
-
         while True: # Dealing with bad input
             guess = input("\nEnter the number of your choice: ")
             try:
@@ -110,23 +106,19 @@ def guess_definition():
         entry = random.choice(dictionary_data)
         word = entry['Word']
         correct_definition = entry['Definition']
-
         # Get random options exlcuding the correct definition
         options = get_random_options(correct_definition, 'Definition')
         options.append(correct_definition)
         random.shuffle(options)
-
         print("\nWord:")
         print(f"\n-->     {word}")
         print("\nChoose the right definition:")
         for i, option in enumerate(options):
             print(f"{i+1}. {option}")
-
         # Adding two options to make the game funnier
         print("----or-----------")
         print(f"{len(options)+1}. Change gameplay")
         print(f"{len(options)+2}. Quit")
-
         while True: # Dealing with bad input
             guess = input("\nEnter the number of your choice: ")
             try:
@@ -157,6 +149,7 @@ def guess_definition():
                 print(f"{len(options)+1}. Change gameplay")
                 print(f"{len(options)+2}. Quit")
 
+
 # Function to call the first question
 def first_question():
     choice_first_question = input("\nYes(y) or No(n): ")
@@ -171,7 +164,6 @@ def second_question():
     print("3. Exit")
     choice_second_question = input("\nEnter your choice (1, 2, or 3): ")
     return choice_second_question
-
 
 
 # Main game loop

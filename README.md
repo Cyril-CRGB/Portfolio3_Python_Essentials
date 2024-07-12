@@ -16,19 +16,25 @@ The player can chose between two ways of playing. Either try to guess the defini
 
 The word and the definition that the player is looking for are randomly chosen and given by the programm.
 
-The player can then chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the programm. No repeatition is allowed. All the given choices suggested by the programm must be different from one another.
+The player can chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the programm. All given choices suggested by the programm must be different from one another. No repeatition is allowed.
 
 Have fun with the game, and learn new words!
 
 
 ## Features:
 
-This app contains 1 global function, 12 major functions and 4 minor functions.
+This app contains 7 functions, including the main fonction.
 
 The global function calls the 12 major and the 12 major call the 4 minor for calulation purpose.
 
-"Guess a word"
-"Guess a definition"
+1) clear_console(): allows to clear the command prompt in order to keep the command line as clean as possible, it makes easier to read the prompt 
+2) get_random_options(correct_value, field): allows to generate random values for the functions "guess_word" and "guess_definition"
+3) guess_word(): allows to get a question about a random word
+4) guess_definition(): allows to get a question about a random definition
+5) first_question(): the "yes or no" question at the begining
+6) second_question(): the second question "choose a gameplay"
+7) main(): allows the player to enjoy himself/herself
+
 
 ## Testing:
 ### buggs : 
