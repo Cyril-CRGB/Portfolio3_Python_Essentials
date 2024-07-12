@@ -6,13 +6,17 @@
 
 This website is a word game based on a free english dictionary. 
 
-The goal for the end user is to test his/her knowledges of the english language, and learn new words.
+The goals for the end user are:
+- to test his/her knowledges of the english language
+- to learn new words
+- to play
+- to have fun
 
-The client can chose between two ways of playing. Either try to guess the definition of a given word, or the opposite, try to guess a word of a given definition.
+The player can chose between two ways of playing. Either try to guess the definition of a given word, or the opposite, try to guess a word of a given definition.
 
-Word and definition that the client is looking for are randomly chosen and given by the programm.
+The word and the definition that the player is looking for are randomly chosen and given by the programm.
 
-The client can then chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the programm. No repeatition is allowed. The solution suggested by the programm must be different from one another.
+The player can then chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the programm. No repeatition is allowed. All the given choices suggested by the programm must be different from one another.
 
 Have fun with the game, and learn new words!
 
@@ -27,7 +31,7 @@ The global function calls the 12 major and the 12 major call the 4 minor for cal
 "Guess a definition"
 
 ## Testing:
-buggs : 
+### buggs : 
 I noticed that the data used had flaws in it. For instance 
 - There is nine time the letter A, and with that all the letters of the alphabet. Which I found redoundant. Therefore I decided to deal with them.
     -> SOLUTION:
@@ -54,11 +58,12 @@ I noticed that the data used had flaws in it. For instance
 
 Thus I decided to analyse the data further to insure the data was meaningfull for the purpose of the game. I created a new python file called "datacleaning.py", and I duplicated the sheet of my googlesheet, renamed it "Original.." in order to keep trac of the modification of the data.
 
-Dealing with exception:
+### Dealing with exception:
 By the functions "guess_word" and "guess_definition", if an Invalid input is given, it takes the player out of the function, back to the "main" function, although the player might still want to keep trying.
 
 
-Testing response from the programm:
+#### Testing response from the programm:
+
 1) first question "yes/no":
 
         a) Invalid input = "z"
@@ -153,7 +158,7 @@ Testing response from the programm:
 
         d) Valid input = "5"
            Output = exit game
-           
+
                 <img src="Readmepics/Printscreen_25.jpg" alt="ReadmePicture25"> 
                         
 
