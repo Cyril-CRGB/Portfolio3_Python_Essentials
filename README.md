@@ -49,10 +49,10 @@ During the analysis, several issues were identified in the data, and appropriate
 
 2. Empty POS (Part of Speech):
 
-- Issue: Some POS entries were empty, particularly for alphabet letters and proper nouns.
-- Solution: Implemented an exception in the program to exclude empty POS entries from being selected for the game.
+- Issue: Some POS entries were unique or reversed, such as "n. & v.", "v. & n.", and "n. & v. t.".
+- Solution: Decided to leave these as they are since POS would not be used.
 
-3. Erroneous Data Entries:
+3. POS Consolidation:
 
 - Issue: Certain entries contained errors or displayed as #NAME?.
 - Solution: Removed all rows containing such errors.
@@ -64,42 +64,37 @@ During the analysis, several issues were identified in the data, and appropriate
  - ", a , or an . PCP. It is presumably an older spelling of scanned. --2. Specifically"
 - Solution: Removed these two entries.
 
-5. POS Consolidation:
+5. Erroneous Data Entries:
 
-- Issue: Some POS entries were unique or reversed, such as "n. & v.", "v. & n.", and "n. & v. t.".
-- Solution: Decided to leave these as they are since POS would not be used.
+- Issue: Some POS entries were empty '""', particularly for alphabet letters and proper nouns.
+- Solution: Implemented an exception in the program to exclude empty '""' POS entries from being selected for the game.
 
 6. Repeated Words:
 
 - Issue: Some words were repeated for each definition they had.
-- Solution: Deleted every second and subsequent repetition of the same word.
+- Solution: Implemented an exception in the program to exclude subsequent occurrence of the word being selected for the game.
 
 7. Empty Rows:
 
-- Issue: Verified that there were no empty rows in the dataset.
+- Issue: Verified manually that there were no empty rows in the dataset.
 
 #### Data Cleaning Script
 To facilitate the cleaning process, a new Python file named datacleaning.py was created. The original sheet in the Google Sheet was duplicated and renamed to "Original.." to keep track of the modifications.
 
-
 ### Dealing with exception:
 
 #### Testing response from the programm:
-
 1. First question "yes/no":
 
-    a) Invalid input = "z"
-       Output = coming back! with error message
+    a) Invalid input = "z"  */--> Output = coming back! with error message*
 
 <img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">
 
-    b) Valid input = "n"
-       Output = quit!
+    b) Valid input = "n"  */--> Output = quit!*
 
 <img src="Readmepics/Printscreen_4.jpg" alt="ReadmePicture4">
 
-    c) Valid input = "y"
-       Output = game!
+    c) Valid input = "y"  */--> Output = game!*
 
 <img src="Readmepics/Printscreen_6.jpg" alt="ReadmePicture6">
 
@@ -145,7 +140,7 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
 <img src="Readmepics/Printscreen_18.jpg" alt="ReadmePicture18">
 
     c) Valid input = "4"
-       Output = back to "Choose a gameplay" see point 2 above
+       Output = back to "Choose a gameplay" see point 1.c above
 
 <img src="Readmepics/Printscreen_19.jpg" alt="ReadmePicture19">
 
@@ -203,16 +198,13 @@ Dictionary in CSV Format Based on the Webster's Dictionary 1913 Edition.
 This is the full OPTED version of a Public Domain dictionary based on the Webster's Unabridged Dictionary, 1913 edition. The CSV file contains all entries, along with the character count for each word, the Part of Speech, and the Definition.
 
 ### Code
-
 - I found help on [stackoverflow.com](https://stackoverflow.com/)
 - I also used CodeInstitute examples
 
 ### Content
-
 - All content was written by myself
 
 ### Media
-
 - no images were used for this project, appart from the readme file
 
 
