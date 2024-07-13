@@ -49,13 +49,13 @@ During the analysis, several issues were identified in the data, and appropriate
 
 2. Empty POS (Part of Speech):
 
-- Issue: Some POS entries were unique or reversed, such as "n. & v.", "v. & n.", and "n. & v. t.".
-- Solution: Decided to leave these as they are since POS would not be used.
+- Issue: Some POS entries were empty '""', particularly for alphabet letters and proper nouns.
+- Solution: Implemented an exception in the program to exclude empty '""' POS entries from being selected for the game.
 
 3. POS Consolidation:
 
-- Issue: Certain entries contained errors or displayed as #NAME?.
-- Solution: Removed all rows containing such errors.
+- Issue: Some POS entries were unique or reversed, such as "n. & v.", "v. & n.", and "n. & v. t.".
+- Solution: Decided to leave these as they are since POS would not be used.
 
 4. Irrelevant High Count Entries:
 
@@ -66,8 +66,8 @@ During the analysis, several issues were identified in the data, and appropriate
 
 5. Erroneous Data Entries:
 
-- Issue: Some POS entries were empty '""', particularly for alphabet letters and proper nouns.
-- Solution: Implemented an exception in the program to exclude empty '""' POS entries from being selected for the game.
+- Issue: Certain entries contained errors or displayed as #NAME?.
+- Solution: Removed all rows containing such errors.
 
 6. Repeated Words:
 
@@ -86,93 +86,81 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
 #### Testing response from the programm:
 1. First question "yes/no":
 
-    a) Invalid input = "z"  */--> Output = coming back! with error message*
+   a) Invalid input = "z"  */--> Output = coming back! with error message*
 
 <img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">
 
-    b) Valid input = "n"  */--> Output = quit!*
+   b) Valid input = "n"  */--> Output = quit!*
 
 <img src="Readmepics/Printscreen_4.jpg" alt="ReadmePicture4">
 
-    c) Valid input = "y"  */--> Output = game!*
+   c) Valid input = "y"  */--> Output = game!*
 
 <img src="Readmepics/Printscreen_6.jpg" alt="ReadmePicture6">
 
 2. Second question "choose a gameplay":
 
-    a) Invalid input = "8"
-       Output = coming back! with error message
+   a) Invalid input = "8"  */--> Output = coming back! with error message*
 
 <img src="Readmepics/Printscreen_8.jpg" alt="ReadmePicture8">
 
-    b) Valid input = "1"
-       Output = game question "Guess a word"
+   b) Valid input = "1"  */--> Output = game question "Guess a word"*
 
 <img src="Readmepics/Printscreen_10.jpg" alt="ReadmePicture10">
 
-    c) Valid input = "2"
-       Output = game question "Guess a definition"
+   c) Valid input = "2"  */--> Output = game question "Guess a definition"*
 
 <img src="Readmepics/Printscreen_12.jpg" alt="ReadmePicture12">
 
-    d) Valid input = "3"
-       Output = exit game
+   d) Valid input = "3"  */--> Output = exit game*
 
 <img src="Readmepics/Printscreen_14.jpg" alt="ReadmePicture14">
 
 3. Game question "Guess a word":
 
-    a) Invalid input = "/////"
-       Output = giving the possible choices again with error message
+   a) Invalid input = "/////"  */--> Output = giving the possible choices again with error message*
 
 <img src="Readmepics/Printscreen_16.jpg" alt="ReadmePicture16">
 
-    b) Valid input = "1" to "3"
+   b) Valid input = "1" to "3"
 
-       A) right answer:
-        Output = "Congrats! Your answer is Correct!" + next question
+   1. right answer  */--> Output = Congrats! Your answer is Correct! + next question*
 
 <img src="Readmepics/Printscreen_17.jpg" alt="ReadmePicture17">
 
-       B) wrong answer:
-        Output = "Incorrect. The correct word was ..." + next question
+   2. wrong answer  */--> Output = Incorrect. The correct word was... + next question*
 
 <img src="Readmepics/Printscreen_18.jpg" alt="ReadmePicture18">
 
-    c) Valid input = "4"
-       Output = back to "Choose a gameplay" see point 1.c above
+   c) Valid input = "4"  */--> Output = back to "Choose a gameplay" see point 1.c above*
 
 <img src="Readmepics/Printscreen_19.jpg" alt="ReadmePicture19">
 
-    d) Valid input = "5"
-       Output = exit game
+   d) Valid input = "5"  */--> Output = exit game*
 
 <img src="Readmepics/Printscreen_20.jpg" alt="ReadmePicture20">
 
 4. Game question "Guess a definition":
 
-    a) Invalid input = "&%/()"
-       Output = giving the possible choices again with error message
+   a) Invalid input = "&%/()"  */--> Output = giving the possible choices again with error message*
 
 <img src="Readmepics/Printscreen_21.jpg" alt="ReadmePicture21">
 
-    b) Valid input "1" to "3"
+   b) Valid input "1" to "3"
 
-       A) right answer:
+   1. right answer  */--> Output = Congrats! Your answer is Correct! + next question*
 
 <img src="Readmepics/Printscreen_22.jpg" alt="ReadmePicture22">
 
-       B) wrong answer:
+   2. wrong answer  */--> Output = "Incorrect. The correct word was ..." + next question*
 
 <img src="Readmepics/Printscreen_23.jpg" alt="ReadmePicture23">
 
-    c) Valid input = "4"
-       Output = back to "Choose a gameplay" see point 2 above
+   c) Valid input = "4"  */--> Output = back to "Choose a gameplay" see point 2 above*
 
 <img src="Readmepics/Printscreen_24.jpg" alt="ReadmePicture24">
 
-    d) Valid input = "5"
-       Output = exit game
+   d) Valid input = "5"  */--> Output = exit game*
 
 <img src="Readmepics/Printscreen_25.jpg" alt="ReadmePicture25">                 
 
