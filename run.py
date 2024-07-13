@@ -48,6 +48,22 @@ def get_random_options(correct_value, field):
     return random.sample(values, 2)
 
 
+# Function to call the first question
+def first_question():
+    choice_first_question = input("\nYes(y) or No(n): ")
+    return choice_first_question
+
+
+# Function to call the second question
+def second_question():
+    print("\nNice! Choose a gameplay:")
+    print("1. Guess the word from a definition")
+    print("2. Guess the definition from a word")
+    print("3. Exit")
+    choice_second_question = input("\nEnter your choice (1, 2, or 3): ")
+    return choice_second_question
+
+
 # Function to guess the word from a given definition with multiple choice options
 def guess_word():
     clear_console() # Making space and the game more enjoyable
@@ -148,22 +164,6 @@ def guess_definition():
                 print("----or-----------")
                 print(f"{len(options)+1}. Change gameplay")
                 print(f"{len(options)+2}. Quit")
-
-
-# Function to call the first question
-def first_question():
-    choice_first_question = input("\nYes(y) or No(n): ")
-    return choice_first_question
-
-
-# Function to call the second question
-def second_question():
-    print("\nNice! Choose a gameplay:")
-    print("1. Guess the word from a definition")
-    print("2. Guess the definition from a word")
-    print("3. Exit")
-    choice_second_question = input("\nEnter your choice (1, 2, or 3): ")
-    return choice_second_question
 
 
 # Main game loop
