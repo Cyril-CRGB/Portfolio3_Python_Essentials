@@ -16,9 +16,9 @@ The goals for the end user are:
 
 The player can chose between two ways of playing. Either try to guess the definition of a given word, or the opposite, try to guess a word of a given definition.
 
-The word and the definition that the player is looking for are randomly chosen and given by the programm.
+The word and the definition that the player is looking for are randomly chosen and given by the program.
 
-The player can chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the programm. All given choices suggested by the programm must be different from one another. No repeatition is allowed.
+The player can chose amongs 3 solutions, only one of them is true, the 2 others are randomly chosen by the program. All given choices suggested by the program must be different from one another. No repeatition is allowed.
 
 Have fun with the game, and learn new words!
 
@@ -83,7 +83,7 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
 
 ### Dealing with exception:
 
-#### Testing response from the programm:
+#### Testing response from the program:
 1. First question "yes/no":
 
  a) Invalid input = "z"       *Output = coming back! with error message*
