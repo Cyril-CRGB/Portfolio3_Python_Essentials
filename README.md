@@ -91,90 +91,90 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
     a) Invalid input = "z"
        Output = coming back! with error message
 
-       ![ReadmePicture2](Readmepics/Printscreen_2.jpg)
+<img src="Readmepics/Printscreen_2.jpg" alt="ReadmePicture2">
 
     b) Valid input = "n"
        Output = quit!
 
-       ![ReadmePicture4](Readmepics/Printscreen_4.jpg)
+<img src="Readmepics/Printscreen_4.jpg" alt="ReadmePicture4">
 
     c) Valid input = "y"
        Output = game!
 
-       ![ReadmePicture6](Readmepics/Printscreen_6.jpg)
+<img src="Readmepics/Printscreen_6.jpg" alt="ReadmePicture6">
 
 2. Second question "choose a gameplay":
 
     a) Invalid input = "8"
        Output = coming back! with error message
 
-       ![ReadmePicture8](Readmepics/Printscreen_8.jpg)
+<img src="Readmepics/Printscreen_8.jpg" alt="ReadmePicture8">
 
     b) Valid input = "1"
        Output = game question "Guess a word"
 
-       ![ReadmePicture10](Readmepics/Printscreen_10.jpg)
+<img src="Readmepics/Printscreen_10.jpg" alt="ReadmePicture10">
 
     c) Valid input = "2"
        Output = game question "Guess a definition"
 
-       ![ReadmePicture12](Readmepics/Printscreen_12.jpg)
+<img src="Readmepics/Printscreen_12.jpg" alt="ReadmePicture12">
 
     d) Valid input = "3"
        Output = exit game
 
-       ![ReadmePicture14](Readmepics/Printscreen_14.jpg)
+<img src="Readmepics/Printscreen_14.jpg" alt="ReadmePicture14">
 
 3. Game question "Guess a word":
 
     a) Invalid input = "/////"
        Output = giving the possible choices again with error message
 
-       ![ReadmePicture16](Readmepics/Printscreen_16.jpg)
+<img src="Readmepics/Printscreen_16.jpg" alt="ReadmePicture16">
 
     b) Valid input = "1" to "3"
 
        A) right answer:
         Output = "Congrats! Your answer is Correct!" + next question
 
-       ![ReadmePicture17](Readmepics/Printscreen_17.jpg)
+<img src="Readmepics/Printscreen_17.jpg" alt="ReadmePicture17">
 
        B) wrong answer:
         Output = "Incorrect. The correct word was ..." + next question
 
-       ![ReadmePicture18](Readmepics/Printscreen_18.jpg)
+<img src="Readmepics/Printscreen_18.jpg" alt="ReadmePicture18">
 
     c) Valid input = "4"
        Output = back to "Choose a gameplay" see point 2 above
 
-       ![ReadmePicture19](Readmepics/Printscreen_19.jpg)
+<img src="Readmepics/Printscreen_19.jpg" alt="ReadmePicture19">
 
     d) Valid input = "5"
        Output = exit game
 
-       ![ReadmePicture20](Readmepics/Printscreen_20.jpg)
+<img src="Readmepics/Printscreen_20.jpg" alt="ReadmePicture20">
 
 4. Game question "Guess a definition":
 
     a) Invalid input = "&%/()"
        Output = giving the possible choices again with error message
 
-       ![ReadmePicture21](Readmepics/Printscreen_21.jpg)
+<img src="Readmepics/Printscreen_21.jpg" alt="ReadmePicture21">
 
     b) Valid input "1" to "3"
 
        A) right answer:
 
-       ![ReadmePicture22](Readmepics/Printscreen_22.jpg)
+<img src="Readmepics/Printscreen_22.jpg" alt="ReadmePicture22">
 
        B) wrong answer:
 
-       ![ReadmePicture23](Readmepics/Printscreen_23.jpg)
+<img src="Readmepics/Printscreen_23.jpg" alt="ReadmePicture23">
 
     c) Valid input = "4"
        Output = back to "Choose a gameplay" see point 2 above
 
-       ![ReadmePicture24](Readmepics/Printscreen_24.jpg)
+<img src="Readmepics/Printscreen_24.jpg" alt="ReadmePicture24">
 
     d) Valid input = "5"
        Output = exit game
