@@ -25,6 +25,7 @@ Have fun with the game, and learn new words!
 
 ## Features:
 
+### Description
 This app contains 7 functions, including the main fonction.
 
 1) clear_console(): allows to clear the command prompt in order to keep the command line as clean as possible, it makes easier to read the prompt 
@@ -35,6 +36,8 @@ This app contains 7 functions, including the main fonction.
 6) guess_definition(): allows to get a question about a random definition
 7) main(): allows the player to enjoy himself/herself
 
+### Schematic
+<img src="Readmepics/schematic.jpg" alt="schematic">
 
 ## Testing:
 
