@@ -28,16 +28,17 @@ Have fun with the game, and learn new words!
 ### Description
 This app contains 7 functions, including the main fonction.
 
-1) clear_console(): allows to clear the command prompt in order to keep the command line as clean as possible, it makes easier to read the prompt 
-2) get_random_options(correct_value, field): allows to generate random values for the functions "guess_word" and "guess_definition"
-3) first_question(): the "yes or no" question at the begining
-4) second_question(): the second question "choose a gameplay"
-5) guess_word(): allows to get a question about a random word
-6) guess_definition(): allows to get a question about a random definition
-7) main(): allows the player to enjoy himself/herself
+f1) clear_console(): allows to clear the command prompt in order to keep the command line as clean as possible, it makes easier to read the prompt 
+f2) get_random_options(correct_value, field): allows to generate random values for the functions "guess_word" and "guess_definition"
+f3) first_question(): the "yes or no" question at the begining
+f4) second_question(): the second question "choose a gameplay"
+f5) guess_word(): allows to get a question about a random word
+f6) guess_definition(): allows to get a question about a random definition
+f7) main(): allows the player to enjoy himself/herself
 
 ### Schematic
 <img src="Readmepics/schematic.jpg" alt="schematic">
+
 
 ## Testing:
 
