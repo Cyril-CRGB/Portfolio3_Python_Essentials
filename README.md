@@ -133,13 +133,14 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
        ![ReadmePicture16](Readmepics/Printscreen_16.jpg)
 
     b) Valid input = "1" to "3"
+
        A) right answer:
-          Output = "Congrats! Your answer is Correct!" + next question
+        Output = "Congrats! Your answer is Correct!" + next question
 
        ![ReadmePicture17](Readmepics/Printscreen_17.jpg)
 
        B) wrong answer:
-          Output = "Incorrect. The correct word was ..." + next question
+        Output = "Incorrect. The correct word was ..." + next question
 
        ![ReadmePicture18](Readmepics/Printscreen_18.jpg)
 
@@ -178,8 +179,7 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
     d) Valid input = "5"
        Output = exit game
 
-       ![ReadmePicture25](Readmepics/Printscreen_25.jpg)
-                        
+       <img src="Readmepics/Printscreen_25.jpg" alt="ReadmePicture25">                 
 
 ## Technologies Used
 
@@ -217,10 +217,10 @@ This is the full OPTED version of a Public Domain dictionary based on the Webste
 
 ## Deployment
 
-1. Create an account with Heroku (could not find my GitHub Student Developer Pack, in my spam either)
+1. Create an account with Heroku
 2. Log in to Heroku
 3. Create an app with Heroku after giving my credit card infos
-4. In settings giving Config Vars, also the 'PORT' one. Giving also two Buildpacks : python and nodejs
+4. In settings giving Config Vars, also the 'PORT' one. Giving also two Buildpacks : python and nodejs (in this order)
 5. Connecting Heroku to my Git Hub and locat the [GitHub Repository](https://github.com/Cyril-CRGB/Portfolio3_Python_Essentials.git)
 6. Then Deploy manually the application
 
