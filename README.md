@@ -179,7 +179,8 @@ To facilitate the cleaning process, a new Python file named datacleaning.py was 
     d) Valid input = "5"
        Output = exit game
 
-       <img src="Readmepics/Printscreen_25.jpg" alt="ReadmePicture25">                 
+<img src="Readmepics/Printscreen_25.jpg" alt="ReadmePicture25">                 
+
 
 ## Technologies Used
 
